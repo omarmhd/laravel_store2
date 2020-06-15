@@ -2,6 +2,7 @@
 
 use App\Role;
 use App\User;
+use Faker\Factory as FakerFactory;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -12,7 +13,7 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run(){
-    $faker = Faker\Factory::create();
+    $faker = FakerFactory::create();
 
 
 
@@ -24,14 +25,18 @@ class UserSeeder extends Seeder
         //     $i++;
         // }
         $user=User::create([
-            'name'=>$faker->name,
-            'email'=>$faker->email,
-            'password'=>$faker->password
+            'name'=>'admin',
+            'email'=>'admin@gmail.com',
+            'password'=>'123456789'
         ]);
 
         $AdminRole=Role::create([
             'name'=>'admin',
         ]);
+
+
+
+
         $name=$user->name;
         $user->roles()->attach($AdminRole,['name' => $name ]);
         foreach(App\Product::all() as $product) {
