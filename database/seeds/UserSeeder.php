@@ -20,6 +20,8 @@ class UserSeeder extends Seeder
         //     $id_numbers[$i] = $categorys->id;
         //     $i++;
         // }
+
+
         $user=User::create([
             'name'=>'admin',
             'email'=>'admin@admin.com',
@@ -29,9 +31,6 @@ class UserSeeder extends Seeder
         $AdminRole=Role::create([
             'name'=>'admin',
         ]);
-
-
-
 
         $name=$user->name;
         $user->roles()->attach($AdminRole,['name' => $name ]);
