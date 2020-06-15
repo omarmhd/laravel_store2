@@ -7,6 +7,7 @@
     <meta name="description" content="">
     <meta name="viewport" >
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.ico">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 
     <!-- CSS here -->
 <link rel="stylesheet" href="{{asset('template/assets/css/bootstrap.min.css')}}">
