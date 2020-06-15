@@ -22,7 +22,7 @@ class UserSeeder extends Seeder
         // }
         $user=User::create([
             'name'=>'admin',
-            'email'=>'admin@gmail.com',
+            'email'=>'admin@admin.com',
             'password'=>'123456789'
         ]);
 
