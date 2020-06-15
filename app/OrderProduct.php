@@ -48,5 +48,7 @@ class OrderProduct extends Model
       where  orders.user_id='$id' ");
            }
 
+           return null;
+
     }
 }
