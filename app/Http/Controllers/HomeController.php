@@ -71,7 +71,6 @@ class HomeController extends Controller
         if(Auth::id()){
         $order_product=new OrderProduct ;
        $orders= $order_product->get_Order_and_product_to_oneUser();
-        if(isset($orders)){
          return view('StatusOrders',compact('orders')) ;
         }else{
 
@@ -82,7 +81,7 @@ class HomeController extends Controller
 
 
 
-    }}
+    }
 
 
 
