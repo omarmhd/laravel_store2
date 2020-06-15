@@ -2,7 +2,6 @@
 
 use App\Role;
 use App\User;
-use Faker\Factory as FakerFactory;
 use Illuminate\Database\Seeder;
 
 class UserSeeder extends Seeder
@@ -13,9 +12,6 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run(){
-    $faker = FakerFactory::create();
-
-
 
 
         // //to find  id  from category_id  //random
