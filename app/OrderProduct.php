@@ -31,7 +31,7 @@ class OrderProduct extends Model
         $id=Auth::id();
 
 
-
+           if($id){
     //   return (DB::table('order_product')->select([DB::raw(' orders.user_id,order_product.quantity, order_product.status,order_product.id,products.name,products.image,products.price,orders.billing_email,orders.billing_name,orders.billing_city,orders.billing_phone')])
 
     //     ->join('products'  , 'products.id' , 'order_product.product_id')
@@ -46,7 +46,7 @@ class OrderProduct extends Model
       INNER JOIN products on products.id = order_product.product_id
       Inner JOIN orders on order_product.order_id = orders.id
       where  orders.user_id='$id' ");
-
+           }
 
     }
 }
