@@ -38,10 +38,16 @@
                   </td>
                   <td class="col-sm-1 col-md-1 text-center priqty"><strong>${{$product->price*$product->pivot->quantity}}</strong></td>
                   <td class="col-sm-1 col-md-1">
-                  <button type="button" class="btn btn-danger">
-                      <span class="glyphicon glyphicon-remove"></span> إزالة
-                  </button></td>
-              </tr>
+                    <form action="{{route('cart.remove')}}" method="post">
+                      @csrf
+                      @method('delete')
+                      <input type="hidden" name='product_id' value="{{$product->id}}">
+                      <button type="submit" class="btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span> إزالة
+                  </button>
+                  </form>
+                </tr>
+              </td>
                 @endforeach
              
                   {{-- <tr>

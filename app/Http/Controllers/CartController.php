@@ -6,7 +6,7 @@ use App\Cart;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Validator;
 class CartController extends Controller
 {
 
@@ -65,6 +65,16 @@ class CartController extends Controller
         }
 
         return \response()->json('success');
+    }
+
+    public function destroy(Request $request)
+    {     
+        
+        Validator::make($request->all(),[
+                'product_id'=>'required',
+              ])->validate();
+        Cart::where(['product_id'=>$request->product_id,'user_id'=> Auth::id()])->delete();
+        return \redirect()->back();
     }
 
 }
