@@ -1,4 +1,15 @@
 <!-- banner -->
+<style>
+	a.w3view-cart {
+    outline: none;
+    border: none;
+    background: #17c3a2;
+    width: 48px;
+    height: 43px;
+    font-size: 24px;
+    color: #000;
+}
+</style>
 <div class="ban-top">
 	<div class="container">
 		<div class="top_nav_left">
@@ -46,11 +57,9 @@
 		</div>
 		<div class="top_nav_right">
 			<div class="wthreecartaits wthreecartaits2 cart cart box_1"> 
-						<form action="#" method="post" class="last"> 
-						<input type="hidden" name="cmd" value="_cart">
-						<input type="hidden" name="display" value="1">
-						<button class="w3view-cart" type="submit" name="submit" value=""><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></button>
-					</form>  
+				
+
+						<a class="w3view-cart" href="{{route('cart.index')}}"><i class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>  
   
 						</div>
 		</div>
