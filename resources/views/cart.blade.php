@@ -2,121 +2,241 @@
 
 @section('content')
 
-  <main>
-    @if (session('error'))
-    <div class="alert alert-danger" role="alert">
-        {{ session('error') }}
-    </div>
-    @endif
-      <!-- Hero Area Start-->
-      <div class="slider-area ">
-          <div class="single-slider slider-height2 d-flex align-items-center"style="height: 200px">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-xl-12">
-                          <div class="hero-cap text-center">
-                              <h2>Cart List</h2>
-                          </div>
-                      </div>
+<section>
+
+  <!--Grid row-->
+  <div class="row">
+
+    <!--Grid column-->
+    <div class="col-lg-8">
+
+      <!-- Card -->
+      <div class="mb-3">
+        <div class="pt-4 wish-list">
+
+          <h5 class="mb-4">Cart (<span>2</span> items)</h5>
+
+          <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                <img class="img-fluid w-100"
+                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12a.jpg" alt="Sample">
+                <a href="#!">
+                  <div class="mask">
+                    <img class="img-fluid w-100"
+                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/12.jpg">
+                    <div class="mask rgba-black-slight"></div>
                   </div>
+                </a>
               </div>
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h5>Blue denim shirt</h5>
+                    <p class="mb-3 text-muted text-uppercase small">Shirt - blue</p>
+                    <p class="mb-2 text-muted text-uppercase small">Color: blue</p>
+                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                  </div>
+                  <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="minus decrease"></button>
+                      <input class="quantity" min="0" name="quantity" value="1" type="number">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="plus increase"></button>
+                    </div>
+                    <small id="passwordHelpBlock" class="form-text text-muted text-center">
+                      (Note, 1 piece)
+                    </small>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                        class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
+                        class="fas fa-heart mr-1"></i> Move to wish list </a>
+                  </div>
+                  <p class="mb-0"><span><strong id="summary">$17.99</strong></span></p class="mb-0">
+                </div>
+              </div>
+            </div>
           </div>
+          <hr class="mb-4">
+          <div class="row mb-4">
+            <div class="col-md-5 col-lg-3 col-xl-3">
+              <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                <img class="img-fluid w-100"
+                  src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13a.jpg" alt="Sample">
+                <a href="#!">
+                  <div class="mask">
+                    <img class="img-fluid w-100"
+                      src="https://mdbootstrap.com/img/Photos/Horizontal/E-commerce/Vertical/13.jpg">
+                    <div class="mask rgba-black-slight"></div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            <div class="col-md-7 col-lg-9 col-xl-9">
+              <div>
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <h5>Red hoodie</h5>
+                    <p class="mb-3 text-muted text-uppercase small">Shirt - red</p>
+                    <p class="mb-2 text-muted text-uppercase small">Color: red</p>
+                    <p class="mb-3 text-muted text-uppercase small">Size: M</p>
+                  </div>
+                  <div>
+                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                        class="minus"></button>
+                      <input class="quantity" min="0" name="quantity" value="1" type="number">
+                      <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                        class="plus"></button>
+                    </div>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div>
+                    <a href="#!" type="button" class="card-link-secondary small text-uppercase mr-3"><i
+                        class="fas fa-trash-alt mr-1"></i> Remove item </a>
+                    <a href="#!" type="button" class="card-link-secondary small text-uppercase"><i
+                        class="fas fa-heart mr-1"></i> Move to wish list </a>
+                  </div>
+                  <p class="mb-0"><span><strong>$35.99</strong></span></p class="mb-0">
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-primary mb-0"><i class="fas fa-info-circle mr-1"></i> Do not delay the purchase, adding
+            items to your cart does not mean booking them.</p>
+
+        </div>
       </div>
-      <!--================Cart Area =================-->
-      <section class="cart_area section_padding">
-        <div class="container">
-        {{-- put message  --}}
+      <!-- Card -->
 
-            @if (session('success'))
-            <div class="alert alert-success" role="alert">
-                {{ session('success') }}
-            </div>
-            @endif
-          <div class="cart_inner">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">details</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Quantity</th>
-                    <th scope="col">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
+      <!-- Card -->
+      <div class="mb-3">
+        <div class="pt-4">
 
+          <h5 class="mb-4">Expected shipping delivery</h5>
 
+          <p class="mb-0"> Thu., 12.03. - Mon., 16.03.</p>
+        </div>
+      </div>
+      <!-- Card -->
 
-                        @foreach ($products as $product )
-                        <td>
-                      <div class="media">
-                        <div class="d-flex">
-                        <a href="{{route('home.index')}}">
-                            <img src="/product_images/{{$product->image}}">       </a>                 </div>
-                        <div class="media-body">
-                          <p>{{$product->name}}</p>
-                        </div>
-                      </div>
-                    </td>
-                    <td>
+      <!-- Card -->
+      <div class="mb-3">
+        <div class="pt-4">
 
-                  <p> {{$product->details}} </p>
+          <h5 class="mb-4">We accept</h5>
 
-                    </td>
-                    <td>
-                      <h5> ${{$product->price}}</h5>
-                    </td>
-                    {{-- <td>
-                       <div class="product_count">
-                        <span class="input-number-decrement"> <i class="ti-minus"></i></span>
-                        <input class="input-number" type="text" value="1" min="0" max="10">
-                        <span class="input-number-increment"> <i class="ti-plus"></i></span>
-                      </div>
-                    </td> --}}
-                    <td>
-                        {{-- not return  problem in pivot --}}
-                        {{ $product->pivot->quantity}}
+          <img class="mr-2" width="45px"
+            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"
+            alt="Visa">
+          <img class="mr-2" width="45px"
+            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"
+            alt="American Express">
+          <img class="mr-2" width="45px"
+            src="https://mdbootstrap.com/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"
+            alt="Mastercard">
+          <img class="mr-2" width="45px"
+            src="https://mdbootstrap.com/wp-content/plugins/woocommerce/includes/gateways/paypal/assets/images/paypal.png"
+            alt="PayPal acceptance mark">
+        </div>
+      </div>
+      <!-- Card -->
 
-                    </td>
+    </div>
+    <!--Grid column-->
 
+    <!--Grid column-->
+    <div class="col-lg-4">
 
-                    <td>
-                      <h5>${{$product->pivot->quantity * $product->price}}</h5>
-                    </td>
-                  </tr>
+      <!-- Card -->
+      <div class="mb-3">
+        <div class="pt-4">
 
-                    @endforeach
-                  <tr>
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <h5>Subtotal</h5>
-                    </td>
-                    <td>
-                      <h5 style="color: red">{{$subtotal}}</h5>
-                    </td>
-                  </tr>
-                  <tr class="shipping_area">
-                    <td></td>
-                    <td></td>
-                    <td>
-                      <h5> count </h5>
-                    </td>
-                    <td>
-                     <h5 style="color: red">{{$count}}</h5>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-              <div class="checkout_btn_inner float-right">
-                <a class="btn_1" href="{{route('home.index')}}">Continue Shopping</a>
-                <a class="btn_1 checkout_btn_1" href="{{route('checkout.index')}}">Proceed to checkout</a>
+          <h5 class="mb-3">The total amount of</h5>
+
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 pb-0">
+              Temporary amount
+              <span>$25.98</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center px-0">
+              Shipping
+              <span>Gratis</span>
+            </li>
+            <li class="list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+              <div>
+                <strong>The total amount of</strong>
+                <strong>
+                  <p class="mb-0">(including VAT)</p>
+                </strong>
+              </div>
+              <span><strong>$53.98</strong></span>
+            </li>
+          </ul>
+
+          <button type="button" class="btn btn-primary btn-block">go to checkout</button>
+
+        </div>
+      </div>
+      <!-- Card -->
+
+      <!-- Card -->
+      <div class="mb-3">
+        <div class="pt-4">
+
+          <a class="dark-grey-text d-flex justify-content-between" data-toggle="collapse" href="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample">
+            Add a discount code (optional)
+            <span><i class="fas fa-chevron-down pt-1"></i></span>
+          </a>
+
+          <div class="collapse" id="collapseExample">
+            <div class="mt-3">
+              <div class="md-form md-outline mb-0">
+                <input type="text" id="discount-code" class="form-control font-weight-light"
+                  placeholder="Enter discount code">
               </div>
             </div>
           </div>
-      </section>
-      <!--================End Cart Area =================-->
-  </main>>
+        </div>
+      </div>
+      <!-- Card -->
+
+    </div>
+    <!--Grid column-->
+
+  </div>
+  <!-- Grid row -->
+
+</section>
+@push('js')
+    <script>
+      $(document).ready(() => {
+  let storageData = [];
+
+  $.get("product.json", (res) => {
+    productList = res;
+
+    const isStorageEmpty = Cookies.getStorage('cart').length === 0;
+
+    if (!isStorageEmpty) {
+      storageData = Cookies.getStorage('cart');
+    }
+
+    updateCart();
+    buildProductList();
+    buildDropdownCart();
+    bindProductEvents();
+  });
+});
+    </script>
+@endpush
  @endsection

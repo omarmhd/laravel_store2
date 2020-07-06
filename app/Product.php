@@ -27,8 +27,8 @@ class Product extends Model
 
     }
 
-    public function getPriceAttribute($value)
-    {
-        return '$'.$value;
-    }
+    // public function getPriceAttribute($value)
+    // {
+    //     // return '$'.$value;
+    // }
 }

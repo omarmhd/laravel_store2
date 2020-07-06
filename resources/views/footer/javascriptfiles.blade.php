@@ -29,6 +29,7 @@
 	activate: function(event) { // Callback function if tab is switched
     var $tab = $(this);
     $category_id = $tab.children()[0].value;
+	
     $.ajax({
         type: "get",
         url: "/category_products/"+$category_id,
@@ -45,14 +46,14 @@
 										<img src="{{ asset('product_images/') }}/${response[index].image}" alt="" class="pro-image-back">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
-													<a href="single.html" class="link-product-add-cart">Quick View</a>
+													<a href="{{url('show_product/')}}/${response[index].id} " class="link-product-add-cart">التفاصيل</a>
 												</div>
 											</div>
 											<span class="product-new-top">New</span>
 											
 									</div>
 									<div class="item-info-product ">
-										<h4><a href="single.html">${response[index].name}</a></h4>
+										<h4><a href="{{url('show_product/')}}/${response[index].id} ">${response[index].name}</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$ ${response[index].price}</span>
 											<del>$ ${response[index].price}</del>
@@ -61,7 +62,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="clearfix"></div>`
+							`
 
             }
             $('.tab-'+$category_id).html($output);

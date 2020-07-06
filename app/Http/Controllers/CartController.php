@@ -12,12 +12,16 @@ class CartController extends Controller
 
 
     public  function index(){
-
+        
         if( Auth::id()){
         $user = User::find( Auth::id());
+        
         $products= $user->products;
+        
         $count=count($products);
-        $sum_price=$products->sum('price');;
+        
+        $sum_price=$products->sum('price');
+        // dd($products);
         $subtotal=0;
         foreach ($products as $product ){
 

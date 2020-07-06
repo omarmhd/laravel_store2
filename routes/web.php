@@ -71,7 +71,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/category_products/{id}', 'HomeController@category_products')->name('home.category_products');
     //single_product_page
-    Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
+Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
 
     //order
     Route::view('/checkout', 'checkout')->name('checkout.index');
@@ -81,7 +81,7 @@ Route::group(['prefix' => ''], function () {
     Route::get('/show_status', 'HomeController@show_status_order')->name('show.status');
 
     //cart
-    Route::post('/store_cart/{id}', 'CartController@store')->name('cart.store')->middleware('auth');
+    Route::post('/store_cart', 'CartController@store')->name('cart.store')->middleware('auth');
     Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');;
 
 
