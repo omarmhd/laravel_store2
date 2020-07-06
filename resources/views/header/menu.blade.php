@@ -48,7 +48,7 @@
 								</div>
 							</ul>
 					</li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">طلباتي</a></li>
+				<li class=" menu__item"><a class="menu__link {{isset($current) && $current  == 'orders' ? 'menu__item--current':''}}" href="{{route('show.status')}}">طلباتي</a></li>
 				<li class=" menu__item {{isset($current) && $current  == 'contact' ? 'menu__item--current':''}}"><a class="menu__link" href="{{route('contact.index')}}">اتصل بنا</a></li>
 				  </ul>
 				</div>

@@ -67,13 +67,14 @@ class HomeController extends Controller
         // return view('home', compact('products', 'count', 'categories'));
     }
 
-    public function show_status_order(   ){
+    public function show_status_order(){
 
 
         if(Auth::id()){
+            $current = "orders";   
         $order_product=new OrderProduct ;
        $orders= $order_product->get_Order_and_product_to_oneUser();
-         return view('StatusOrders',compact('orders')) ;
+         return view('StatusOrders',compact('orders','current')) ;
         }else{
 
           return back()->with('error','You must log in first to access the page');
