@@ -13,10 +13,11 @@ class HomeContactController extends Controller
 
     public function  index()
     {
-
+        
         $contact = DB::table('contact')->latest('id')->first();
+        $current = 'contact';
         if (!empty($contact)) {
-            return view('contact', compact('contact'));
+            return view('contact', compact('contact','current'));
         } else {
 
             return back()->with('error', 'No data was found on the (contact ) page');
@@ -53,7 +54,7 @@ class HomeContactController extends Controller
     {
 
         $validator = Validator::make($request->all(), [
-            'meesage' => 'required',
+            'message' => 'required',
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
@@ -61,7 +62,7 @@ class HomeContactController extends Controller
         ])->validate();
 
         $meessage = DB::table('messages')->insert([
-            'meesage' => $request->meesage,
+            'meesage' => $request->message,
             'name' =>  $request->name,
             'email' => $request->email,
             'subject' => $request->subject

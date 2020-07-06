@@ -25,5 +25,10 @@ class Product extends Model
     {
         return $this->belongsToMany('App\order');
 
-}
+    }
+
+    public function getPriceAttribute($value)
+    {
+        return '$'.$value;
+    }
 }

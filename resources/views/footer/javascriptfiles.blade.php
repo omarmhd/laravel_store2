@@ -111,3 +111,4 @@
 <!-- //here ends scrolling icon -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{ asset('newDesign/js/bootstrap.js') }}"></script>
+@stack('js')

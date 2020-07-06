@@ -7,6 +7,7 @@
     @include('header.menu')
     @yield('content')
     @include('footer.footer')
-</body>
     @include('footer.javascriptfiles')
+</body>
+   
 </html>

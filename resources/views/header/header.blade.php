@@ -15,5 +15,7 @@
         body{
             direction: rtl
         }
+
     </style>
+     @stack('css')
 </head>

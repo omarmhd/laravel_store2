@@ -16,8 +16,8 @@
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
 				  <ul class="nav navbar-nav menu__list">
-				  <li class="active menu__item {{isset($current) == 'home' ? 'menu__item--current':''}}"><a class="menu__link" href="{{route('home.index')}}">الرئيسية <span class="sr-only">(current)</span></a></li>
-				  <li class=" menu__item {{isset($current) == 'about' ? 'menu__item--current':''}}"><a class="menu__link" href="{{ route('about.index') }}">من نحن</a></li>
+				  <li class="active menu__item {{isset($current) && $current  == 'home' ? 'menu__item--current':''}}"><a class="menu__link" href="{{route('home.index')}}">الرئيسية <span class="sr-only">(current)</span></a></li>
+				  <li class=" menu__item {{isset($current) && $current  == 'about' ? 'menu__item--current':''}}"><a class="menu__link" href="{{ route('about.index') }}">من نحن</a></li>
 					<li class=" menu__item"><a class="menu__link" href="about.html">الأعمال</a></li>
 					<li class="dropdown menu__item">
 						<a href="#" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">الصفحات <span class="caret"></span></a>
@@ -38,7 +38,7 @@
 							</ul>
 					</li>
 					<li class=" menu__item"><a class="menu__link" href="contact.html">طلباتي</a></li>
-					<li class=" menu__item"><a class="menu__link" href="contact.html">اتصل بنا</a></li>
+				<li class=" menu__item {{isset($current) && $current  == 'contact' ? 'menu__item--current':''}}"><a class="menu__link" href="{{route('contact.index')}}">اتصل بنا</a></li>
 				  </ul>
 				</div>
 			  </div>
