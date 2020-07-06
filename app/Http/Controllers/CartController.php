@@ -19,7 +19,7 @@ class CartController extends Controller
         $products= $user->products;
         
         $count=count($products);
-        
+       
         $sum_price=$products->sum('price');
         // dd($products);
         $subtotal=0;

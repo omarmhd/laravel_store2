@@ -30,13 +30,13 @@
                       </div>
                   </div></td>
                   <td class="col-sm-1 col-md-1" style="text-align: center">
-                  <input type="text" class="form-control quantity"  value="1">
+                  <input type="text" class="form-control quantity"  value="{{$product->pivot->quantity}}">
                   <input type="hidden" class="product_id" value="{{$product->id}}">
                   </td>
                   <td class="col-sm-1 col-md-1 text-center price"><strong>${{$product->price}}</strong>
                   
                   </td>
-                  <td class="col-sm-1 col-md-1 text-center priqty"><strong>${{$product->price}}</strong></td>
+                  <td class="col-sm-1 col-md-1 text-center priqty"><strong>${{$product->price*$product->pivot->quantity}}</strong></td>
                   <td class="col-sm-1 col-md-1">
                   <button type="button" class="btn btn-danger">
                       <span class="glyphicon glyphicon-remove"></span> إزالة
@@ -75,9 +75,9 @@
                       </button> --}}
                     </td>
                       <td>
-                      <button type="button" class="btn btn-success">
+                      <a  class="btn btn-success" href="{{route('checkout.index')}}"> 
                           طلب المنتجات <span class="glyphicon glyphicon-play"></span>
-                      </button></td>
+                      </a></td>
                   </tr>
               </tbody>
           </table>
