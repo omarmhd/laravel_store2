@@ -83,6 +83,7 @@ Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
     //cart
     Route::post('/store_cart', 'CartController@store')->name('cart.store')->middleware('auth');
     Route::get('/cart', 'CartController@index')->name('cart.index')->middleware('auth');;
+    Route::get('cart/updateQty', 'CartController@update')->middleware('auth');;
 
 
     // Homecontact

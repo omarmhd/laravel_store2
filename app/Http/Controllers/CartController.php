@@ -27,7 +27,7 @@ class CartController extends Controller
 
             $subtotal +=$product->pivot->quantity*$product->price;
         }
-
+        $subtotal ='$'.$subtotal;
      return view('cart',compact('products','count','subtotal'));
         }else{
 
@@ -56,6 +56,15 @@ class CartController extends Controller
     }
 
 
+    public function update(Request $request)
+    {
+        if(Auth::id()){
+            Cart::where(['product_id'=>$request->product_id,'user_id'=> Auth::id()])->update([
+                'quantity'=>$request->quantity ?? 1
+                ]);
+        }
 
+        return \response()->json('success');
+    }
 
 }

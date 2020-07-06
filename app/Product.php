@@ -9,7 +9,7 @@ class Product extends Model
     public $table='products';
 
 
-    protected $fillable=['name','price','long_description','category_id','image','details'];
+    protected $fillable=['name','user_id','price','long_description','category_id','image','details'];
     public function category()
     {
         return $this->belongsTo('App\Category');
@@ -20,7 +20,10 @@ class Product extends Model
     {
         return $this->belongsToMany('App\User');
     }
-
+    public function getUser()
+    {
+        return $this->belongsTo('App\User','user_id');
+    }
     public function orders()
     {
         return $this->belongsToMany('App\order');
