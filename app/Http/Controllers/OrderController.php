@@ -22,6 +22,7 @@ class OrderController extends Controller
     {
       $OrderProduct=new OrderProduct();
      $orders= $OrderProduct->getDataProductsUser();
+     
       return view('admin.products.products_order', compact('orders'));
 
     }
@@ -100,11 +101,18 @@ class OrderController extends Controller
     {
         $user = User::find( Auth::id());
         $products= $user->products;
+
+        if(empty($products->toArray())){
+            return \redirect('/'); 
+        } 
         $subtotal=0;
         foreach ($products as $product ){
 
             $subtotal +=$product->pivot->quantity*$product->price;
         }
+        // if(){
+            
+        // }
         $subtotal ='$'.$subtotal;
         return view('checkout',compact('subtotal'));
     }
