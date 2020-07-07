@@ -74,7 +74,7 @@ Route::group(['prefix' => ''], function () {
 Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
 
     //order
-    Route::view('/checkout', 'checkout')->name('checkout.index');
+    Route::get('/checkout', 'OrderController@show')->name('checkout.index');
     Route::post('/store-order', 'OrderController@store')->name('order.store');
 
     //show_status page

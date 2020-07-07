@@ -28,7 +28,7 @@ class CartController extends Controller
             $subtotal +=$product->pivot->quantity*$product->price;
         }
         $subtotal ='$'.$subtotal;
-     return view('cart',compact('products','count','subtotal'));
+          return view('cart',compact('products','count','subtotal'));
         }else{
 
             return  back()->with('error', 'You must log in first');
@@ -39,13 +39,18 @@ class CartController extends Controller
 
 
 
-    public  function store( Request $request ,$id){
+    public  function store( Request $request)
+    {
+        $request->validate([
+            'product_id' => 'required|integer',
+            
+        ]);
 
         if(Auth::id()){
           Cart::create([
-          'product_id'=>$id,
+          'product_id'=>$request->product_id,
           'user_id'=> Auth::id(),
-          'quantity'=>$request->quantity ?:'1'
+          'quantity'=>1
           ]);
          return  redirect()->route('cart.index')->with('success','A new product has been added to cart ');
         }

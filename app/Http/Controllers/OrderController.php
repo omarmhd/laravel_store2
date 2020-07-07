@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use App\User;
 class OrderController extends Controller
 {
     /**
@@ -44,19 +44,16 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator=Validator::make($request->all(),[
+        
+        request()->validate([
 
-        //     'name'=>'required',
-
-        //      'email'=>'required|email',
-        //      'address'=>'required',
-        //      'city'=>'required',
-        //      'postalcode'=>'required',
-        //      'province'=>'required',
-        //      'phone'=>'required|numeric '  ,
-        //      'gateway'=>'required'
-
-        //   ])->validate();
+             'name'=>'required|string|max:255',
+             'address'=>'required|string|max:255',
+             'city'=>'required|string|max:255',
+             'postalcode'=>'required|numeric',
+             'province'=>'required|string|max:255',
+             'phone_number'=>'required|numeric',
+          ]);
         $idUser=Auth::id();
             try{
                 $order=order::create([
@@ -101,7 +98,15 @@ class OrderController extends Controller
      */
     public function show(order $order)
     {
-        //
+        $user = User::find( Auth::id());
+        $products= $user->products;
+        $subtotal=0;
+        foreach ($products as $product ){
+
+            $subtotal +=$product->pivot->quantity*$product->price;
+        }
+        $subtotal ='$'.$subtotal;
+        return view('checkout',compact('subtotal'));
     }
 
     /**

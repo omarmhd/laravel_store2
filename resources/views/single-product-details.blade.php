@@ -62,9 +62,11 @@
 				
 					<div class="occasion-cart">
 						<div class="snipcart-details top_brand_home_details item_add single-item hvr-outline-out button2">
-												<form action="{{ route('cart.store', ['id' => $product->id]) }}" method="post">
+												<form action="{{ route('cart.store') }}" method="post">
 													@csrf
+
 														<fieldset>
+														    <input type="hidden" name="product_id" value="{{$product->id}}">
 															<input type="submit" name="submit" value="إضافة الى السلة" class="button">
 														</fieldset>
 													</form>
