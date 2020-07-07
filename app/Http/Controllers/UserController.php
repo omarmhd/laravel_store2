@@ -126,7 +126,7 @@ class UserController extends Controller
 
         if (request()->hasfile('photo')) {
             $user = User::where(['id' => auth::user()->id])->first();
-            File::delete("profile/$user->photo");
+            File::delete("profile/$user->image");
             $name = request('photo')->getClientOriginalName();
             $name = time() .uniqid(). '_' . $name;
 
