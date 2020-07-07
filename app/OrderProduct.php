@@ -51,4 +51,40 @@ class OrderProduct extends Model
            return null;
 
     }
+
+    function get_Order_Accepted_count()
+    {
+      $id=Auth::id();
+      return  DB::select("SELECT
+         COUNT(order_product.status) as count
+      FROM
+       order_product
+      Inner JOIN orders on order_product.order_id = orders.id 
+      where  orders.user_id='$id' and order_product.status = 1");
+    }
+    function get_Order_Pending_count()
+    {
+      $id=Auth::id();
+      return  DB::select("SELECT
+        COUNT(order_product.status) as count
+      FROM
+       order_product
+      Inner JOIN orders on order_product.order_id = orders.id 
+      where  orders.user_id='$id' and order_product.status =0 ");
+
+
+    }
+    function get_Order_Rejected_count()
+    {
+      $id=Auth::id();
+      return  DB::select("SELECT
+        COUNT(order_product.status) as count
+      FROM
+       order_product
+      Inner JOIN orders on order_product.order_id = orders.id 
+      where  orders.user_id='$id' and order_product.status = 2");
+
+
+    }
+   
 }

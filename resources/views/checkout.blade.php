@@ -147,6 +147,7 @@
     </section>
 
     @push('js')
+
     {{-- <script src="{{ asset('newDesign/js/jquery-migrate-3.0.0.js') }}"></script> --}}
 	<script src="{{ asset('newDesign/js/jquery-ui.min.js') }}"></script>
 	<!-- Popper JS -->

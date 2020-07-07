@@ -93,4 +93,10 @@ Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
 
     // Homeabout
     Route::get('/about', 'HomeAboutController@index')->name('about.index');
+
+    //user profile
+    Route::get('/user/profile', 'HomeController@profile')->name('user.profile');
+    Route::put('/user/update', 'UserController@updateUser')->name('user.update');
+    Route::put('/user/update-image', 'UserController@update_image')->name('user.update_image');
+
 });

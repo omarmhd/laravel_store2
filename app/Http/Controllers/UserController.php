@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-
+use Illuminate\Support\Facades\Validator;
+use File;
+use App\OrderProduct;
 class UserController extends Controller
 {
     /**
@@ -61,6 +63,37 @@ class UserController extends Controller
         }
     }
 
+    public function updateUser()
+    {
+        $id = auth()->user()->id;
+        
+        $data = Validator::make(request()->all(), [
+            'name'     => 'required|string|max:20|min:4',
+            'email'    => 'required|email|unique:users,email,' . $id,
+            'mobile'  =>  'sometimes|nullable|unique:users,mobile'.$id,
+            'website'  => 'sometimes|nullable',
+            'gender'   => 'required|integer|min:0|max:3',
+        ]);
+
+        $name = strip_tags(request("name"));
+        if($name !== ''){
+            User::where('id', $id)->update([
+                'name'     => $name,
+                'email'    => request("email"),
+                'mobile'  => request("mobile"),
+                'website'  => request("website"),
+                'gender'   => request("gender"),
+
+            ]);
+            return redirect()->back()->with('success', 'Done');
+        }else{
+
+            return redirect()->back();
+        }
+
+        return null;
+    }
+
 
 
     /**
@@ -82,5 +115,27 @@ class UserController extends Controller
 
             return back()->with('error', 'error not found or role delete failed ');
         }
+    }
+
+    public function update_image()
+    {
+
+        $data = $this->validate(request(), [
+            'photo' => 'required|image',
+        ]);
+
+        if (request()->hasfile('photo')) {
+            $user = User::where(['id' => auth::user()->id])->first();
+            File::delete("profile/$user->photo");
+            $name = request('photo')->getClientOriginalName();
+            $name = time() .uniqid(). '_' . $name;
+
+            request('photo')->move(public_path() . '/profile/', $name);
+            User::where(['id' => auth::user()->id])->update(['image' => $name]);
+
+        }
+
+        return redirect()->back();
+
     }
 }

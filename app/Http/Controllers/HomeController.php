@@ -82,7 +82,22 @@ class HomeController extends Controller
         }
         }
 
+        public function profile(){
 
+
+              if(Auth::id()){
+                $user = User::find(Auth::id());
+                $order_product=new OrderProduct ;
+                $numberOfOrders['accepted'] = $order_product->get_Order_Accepted_count()[0]->count;
+                $numberOfOrders['pending'] =  $order_product->get_Order_Pending_count()[0]->count;
+                $numberOfOrders['rejected'] = $order_product->get_Order_Rejected_count()[0]->count;
+                 return view('user.edit',compact('user','numberOfOrders')) ;
+              }else{
+      
+                return back()->with('error','You must log in first to access the page');
+      
+              }
+            }
 
     }
 
