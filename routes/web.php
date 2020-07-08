@@ -61,9 +61,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'can:access_to_contr
 });
 
 
-
+Route::get('/logout', 'Auth\LoginController@logout');
 Auth::routes();
-Route::get('/logout', 'Auth\LoginController@logout')->name('logout');
+
 
 Route::group(['prefix' => ''], function () {
 
@@ -95,8 +95,8 @@ Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
     Route::get('/about', 'HomeAboutController@index')->name('about.index');
 
     //user profile
-    Route::get('/user/profile', 'HomeController@profile')->name('user.profile');
-    Route::put('/user/update', 'UserController@updateUser')->name('user.update');
-    Route::put('/user/update-image', 'UserController@update_image')->name('user.update_image');
+    Route::get('/user/profile', 'HomeController@profile')->name('client.profile');
+    Route::put('/user/update', 'UserController@updateUser')->name('client.update');
+    Route::put('/user/update-image', 'UserController@update_image')->name('client.update_image');
 
 });

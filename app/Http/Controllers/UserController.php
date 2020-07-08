@@ -72,7 +72,7 @@ class UserController extends Controller
             'email'    => 'required|email|unique:users,email,' . $id,
             'mobile'  =>  'sometimes|nullable|unique:users,mobile'.$id,
             'website'  => 'sometimes|nullable',
-            'gender'   => 'required|integer|min:0|max:3',
+            'gender'   => 'required|integer',
         ]);
 
         $name = strip_tags(request("name"));

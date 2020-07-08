@@ -7,11 +7,25 @@
     float: right !important;
     }
     .text-right {
-    text-align: left;
+      text-align: right;
     }
-    .pull-left {
-        float: right !important;
-    }
+    .img-thumbnail {
+    height: 184px;
+    width: 184px;
+    padding: 2px;
+    background-color: #dbdada7a;
+    cursor: pointer;
+  }
+  .fa-camera {
+    position: relative;
+    top: 144px;
+    font-size: 25px;
+    float: right;
+    color: #000000;
+    right: 25%;
+    cursor: pointer;
+}
+  
     </style>
 @endpush
 <div class="container bootstrap snippet" style="margin-top: 50px;">
@@ -20,8 +34,10 @@
     <div class="col-sm-3" style="float: right;"><!--left col-->
             
 
-    <div class="text-center">
+    <div class="text-center iconCam">
     <img src="{{$user->image != null ? asset('/profile/'.$user->image ) : 'http://ssl.gstatic.com/accounts/ui/avatar_2x.png'}}" class="avatar img-circle img-thumbnail" alt="avatar" id="click">
+    <i class="fa fa-camera" aria-hidden="true"></i>
+
       <div class="hidden">
         <form method="post" action="{{ url('user/update-image') }}" id="upload_form" accept-charset="utf-8" enctype="multipart/form-data">
           @csrf
@@ -35,20 +51,23 @@
 
              
         <div class="panel panel-default">
-          <div class="panel-heading">الموقع الالكتروني <i class="fa fa-link fa-1x"></i></div>
+          <div class="panel-heading"><i class="fa fa-link fa-1x"></i> الموقع الالكتروني </div>
           <div class="panel-body"><a href="{{$user->website}}">{{$user->website}}</a></div>
         </div>
         
         
         <ul class="list-group">
-          <li class="list-group-item text-muted">القائمة <i class="fa fa-dashboard fa-1x"></i></li>
-          <li class="list-group-item text-right"><a href="{{route('show.status')}}"><span class="pull-left"><strong> الطلبات المقبولة</strong></span></a> {{$numberOfOrders['accepted']}}</li>
-          <li class="list-group-item text-right"><a href="{{route('show.status')}}"><span class="pull-left"><strong> الطلبات المعلقة</strong></span></a> {{$numberOfOrders['pending']}}</li>
-          <li class="list-group-item text-right"><a href="{{route('show.status')}}"><span class="pull-left"><strong> الطلبات المرفوضة</strong></span></a> {{$numberOfOrders['rejected']}}</li>
+          <li class="list-group-item text-muted"><i class="fa fa-dashboard fa-1x"></i> القائمة </li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المقبولة</strong></span></a> {{$numberOfOrders['accepted']}}</li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المعلقة</strong></span></a> {{$numberOfOrders['pending']}}</li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المرفوضة</strong></span></a> {{$numberOfOrders['rejected']}}</li>
           {{-- <li class="list-group-item text-right"><span class="pull-left"><strong></strong></span> 37</li>
           <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li> --}}
         </ul> 
-            
+        <ul class="list-group">
+          <li class="list-group-item text-muted"> <i class="fa fa-wrench fa-1x"></i> اعدادات</li>
+          <li class="list-group-item text-right"><a href="{{route('show.status')}}"><strong>طلب التسجيل كحرفي</strong></a></li>
+        </ul>   
         
       </div><!--/col-3-->
     <div class="col-sm-9">
@@ -58,7 +77,7 @@
         <div class="tab-content">
           <div class="tab-pane active" id="home">
               <hr>
-          <form class="form" action="{{route('user.update')}}" method="post" id="registrationForm">
+          <form class="form" action="{{route('client.update')}}" method="post" id="registrationForm">
             @method('put')
             @csrf
                     <div class="form-group">
@@ -103,7 +122,7 @@
                          <div class="col-xs-12">
                               <br>
                               <button class="btn btn-lg btn-success" type="submit"><i class="glyphicon glyphicon-ok-sign"></i> حفظ</button>
-                               <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> تفريغ الحقول</button>
+                               {{-- <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> تفريغ الحقول</button> --}}
                           </div>
                     </div>
               </form>
@@ -116,7 +135,7 @@
   </div><!--/row-->
   @push('js')
   <script>
-    $('#click').click(function(){
+    $('#click,.fa-camera').click(function(){
         document.getElementById('ValidPhotoProfile').click();
     });
     $('#ValidPhotoProfile').on('change',function(){
