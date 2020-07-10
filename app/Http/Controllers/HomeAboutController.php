@@ -28,7 +28,7 @@ class HomeAboutController extends Controller
         public function create( ){
 
 
-                return view('admin.editAboutPage');
+                return view('backend.edit_pages.editAboutPage');
 
 
         }

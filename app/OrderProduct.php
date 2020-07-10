@@ -25,6 +25,18 @@ class OrderProduct extends Model
       Inner JOIN orders on order_product.order_id = orders.id');
     }
 
+    
+    function getDataProductsUserForSeller()
+    {
+      $id=Auth::id();
+        return  DB::select("SELECT
+      order_product.quantity,products.user_id, order_product.status,order_product.id,products.name,products.image,products.price,orders.billing_email,orders.billing_name,orders.billing_city,orders.billing_phone
+      FROM
+       order_product
+      INNER JOIN products on products.id = order_product.product_id  
+      Inner JOIN orders on order_product.order_id = orders.id
+       Where products.user_id = $id");
+    }
 
     function get_Order_and_product_to_oneUser()
     {

@@ -2,100 +2,157 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\User;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\CreateroleRequest;
+use App\Http\Requests\UpdateroleRequest;
+use App\Repositories\roleRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
+use Flash;
+use Response;
 
-class RoleController extends Controller
+class RoleController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+    /** @var  roleRepository */
+    private $roleRepository;
+
+    public function __construct(roleRepository $roleRepo)
     {
-
-
-        if (Gate::denies('access_to_role')) {
-
-            abort(403, 'unauthorized access  ');
-        }
-        $roles = Role::all();
-
-        return view('admin.roles.roles', compact('roles'));
+        $this->roleRepository = $roleRepo;
     }
 
+    /**
+     * Display a listing of the role.
+     *
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+  
+        $roles = $this->roleRepository->all();
 
+        return view('backend.roles.index')
+            ->with('roles', $roles);
+    }
+
+    /**
+     * Show the form for creating a new role.
+     *
+     * @return Response
+     */
     public function create()
     {
-
-        return view('admin.roles.createRole');
+        return view('backend.roles.create');
     }
 
 
-    public function store(Request $request)
+    /**
+     * Store a newly created role in storage.
+     *
+     * @param CreateroleRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreateroleRequest $request)
     {
-        $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:roles'
-        ])->validate();
+        $input = $request->all();
 
-        try {
-            Role::create([
-                'name' => $request->name
+        $role = $this->roleRepository->create($input);
 
-            ]);
+        Flash::success('Role saved successfully.');
 
-            return redirect()->route('role.index')->with('success', 'a new role  has been added successfully');
-        } catch (ModelNotFoundException $exception) {
-
-            return back()->with('error', 'error adding a new role');
-        }
-    }
-
-    public function edit($id)
-    {
-        if (Gate::denies('access_to_role')) {
-            abort(403, 'unauthorized access  ');
-        }
-        $role = Role::find($id);
-        return view('admin.roles.editRole', compact('role'));
-    }
-
-
-    public function update(Request $request, $id)
-    {
-
-        $validator = Validator::make($request->all(), [
-            'name' => 'required'
-        ])->validate();
-
-        try {
-            $roles = Role::where('id', $id)->update(['name' => $request->name]);
-            return redirect()->route('role.index')->with('success', 'roles successfully updated');
-        } catch (ModelNotFoundException $exception) {
-
-            return back()->with('error', 'error not found or role update failed ');
-        }
+        return redirect(route('roles.index'));
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Display the specified role.
      *
-     * @param  \App\Role  $role
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $role = $this->roleRepository->find($id);
+
+        if (empty($role)) {
+            Flash::error('Role not found');
+
+            return redirect(route('roles.index'));
+        }
+
+        return view('backend.roles.show')->with('role', $role);
+    }
+
+    /**
+     * Show the form for editing the specified role.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $role = $this->roleRepository->find($id);
+
+        if (empty($role)) {
+            Flash::error('Role not found');
+
+            return redirect(route('roles.index'));
+        }
+
+        return view('backend.roles.edit')->with('role', $role);
+    }
+
+    /**
+     * Update the specified role in storage.
+     *
+     * @param int $id
+     * @param UpdateroleRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateroleRequest $request)
+    {
+        $role = $this->roleRepository->find($id);
+
+        if (empty($role)) {
+            Flash::error('Role not found');
+
+            return redirect(route('roles.index'));
+        }
+
+        $role = $this->roleRepository->update($request->all(), $id);
+
+        Flash::success('Role updated successfully.');
+
+        return redirect(route('roles.index'));
+    }
+
+    /**
+     * Remove the specified role from storage.
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
      */
     public function destroy($id)
     {
-        try {
-            $role = Role::where('id', $id)->delete();
-            return redirect()->route('role.index')->with('success', 'roles successfully deleted');
-        } catch (ModelNotFoundException $exception) {
+        $role = $this->roleRepository->find($id);
 
-            return back()->with('error', 'error not found or role delete failed ');
+        if (empty($role)) {
+            Flash::error('Role not found');
+
+            return redirect(route('roles.index'));
         }
+
+        $this->roleRepository->delete($id);
+
+        Flash::success('Role deleted successfully.');
+
+        return redirect(route('roles.index'));
     }
 }

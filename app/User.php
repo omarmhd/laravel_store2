@@ -47,9 +47,14 @@ class User extends Authenticatable
 
     public function  roles()
     {
+     
         return $this->belongsToMany('App\Role')->withPivot('name');
     }
-
+    public function  getUserRole()
+    {
+     
+        return $this->belongsTo('App\Role');
+    }
 
     public function products()
     {

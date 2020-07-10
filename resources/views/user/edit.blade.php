@@ -66,20 +66,22 @@
         </ul> 
         <ul class="list-group">
           <li class="list-group-item text-muted"> <i class="fa fa-wrench fa-1x"></i> اعدادات</li>
-          <li class="list-group-item text-right"><a href="{{route('show.status')}}"><strong>طلب التسجيل كحرفي</strong></a></li>
+          <li class="list-group-item text-right"><a href="{{route('client.beSeller')}}"><strong>طلب التسجيل كحرفي</strong></a></li>
         </ul>   
         
       </div><!--/col-3-->
     <div class="col-sm-9">
           <ul class="nav nav-tabs">
               <li class="active"><a data-toggle="tab" href="#home">الرئيسية</a></li>
+              
             </ul>
         <div class="tab-content">
           <div class="tab-pane active" id="home">
               <hr>
-          <form class="form" action="{{route('client.update')}}" method="post" id="registrationForm">
-            @method('put')
-            @csrf
+              
+            <form class="form" action="{{route('client.update')}}" method="post" id="registrationForm">
+                @method('put')
+                  @csrf
                     <div class="form-group">
                         
                         <div class="col-xs-12">
@@ -125,14 +127,15 @@
                                {{-- <button class="btn btn-lg" type="reset"><i class="glyphicon glyphicon-repeat"></i> تفريغ الحقول</button> --}}
                           </div>
                     </div>
-              </form>
-            <hr>
-           </div><!--/tab-pane-->
-            </div><!--/tab-pane-->
-        </div><!--/tab-content-->
+            </form>
 
-      </div><!--/col-9-->
-  </div><!--/row-->
+              <hr>
+           </div><!--/tab-pane-->
+        </div><!--/tab-content-->
+     </div><!--/col-9-->
+
+      </div><!--/row-->
+  </div><!--/container-->
   @push('js')
   <script>
     $('#click,.fa-camera').click(function(){

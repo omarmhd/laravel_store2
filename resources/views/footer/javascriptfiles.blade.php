@@ -28,7 +28,8 @@
 	closed: 'accordion', // Start closed if in accordion view
 	activate: function(event) { // Callback function if tab is switched
     var $tab = $(this);
-    $category_id = $tab.children()[0].value;
+    $category_id = $tab.children('input')[0].value;
+	// console.log($tab.children('input')[0]);
 	
     $.ajax({
         type: "get",

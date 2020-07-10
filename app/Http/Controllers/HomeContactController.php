@@ -29,7 +29,7 @@ class HomeContactController extends Controller
 
         //$contact = DB::table('contact')->latest('id')->first();
 
-        return view('admin.editContactPage');
+        return view('backend.edit_pages.editContactPage');
     }
 
     public function  store(Request $request)

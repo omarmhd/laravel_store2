@@ -2,128 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use App\Role;
-use App\RoleUser;
-use App\User;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\UpdateUserRequest;
+use App\Repositories\UserRepository;
+use App\Http\Controllers\AppBaseController;
+use App\Repositories\roleRepository;
+use App\Models\RoleUser;
 use Illuminate\Http\Request;
+use Flash;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\Facades\Validator;
+use Response;
 use File;
-use App\OrderProduct;
 class UserController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        if (Gate::denies('access_to_controll_panel')) {
-            abort(403, 'unauthorized access');
-        }
-        $users = User::all();
-        return view('admin.users.users', compact('users'));
+    /** @var  UserRepository */
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepo)
+    {  
+        $this->userRepository = $userRepo;
     }
-
-
-    public function edit($id)
-    {
-        if (Gate::denies('edit-user')) {
-            abort(403, 'unauthorized access to edit user');
-        }
-        try {
-            $user = User::find($id);
-            $roles = Role::all();
-            return view('admin.users.editUser', compact('user', 'roles'));
-        } catch (ModelNotFoundException $exception) {
-            return back()->with('error', ' not found user ' . $id);
-        }
-    }
-
-
-    public function update(Request $request, $id)
-    {
-      try {
-            $role_id = $request->role_id;
-    RoleUser::where('user_id', $id)->updateOrCreate([
-                'name' => $request->name ?? "",
-                'user_id' => $id,
-                'role_id' => $role_id
-            ]);
-
-            return redirect()->route('user.index')->with('success', 'user successfully updated');
-        } catch (Exception $exception) {
-
-            return back()->with('error', 'error not found or role update failed ');
-        }
-    }
-
-    public function updateUser()
-    {
-        $id = auth()->user()->id;
-        
-        $data = Validator::make(request()->all(), [
-            'name'     => 'required|string|max:20|min:4',
-            'email'    => 'required|email|unique:users,email,' . $id,
-            'mobile'  =>  'sometimes|nullable|unique:users,mobile'.$id,
-            'website'  => 'sometimes|nullable',
-            'gender'   => 'required|integer',
-        ]);
-
-        $name = strip_tags(request("name"));
-        if($name !== ''){
-            User::where('id', $id)->update([
-                'name'     => $name,
-                'email'    => request("email"),
-                'mobile'  => request("mobile"),
-                'website'  => request("website"),
-                'gender'   => request("gender"),
-
-            ]);
-            return redirect()->back()->with('success', 'Done');
-        }else{
-
-            return redirect()->back();
-        }
-
-        return null;
-    }
-
-
 
     /**
-     * Remove the specified resource from storage.
+     * Display a listing of the User.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return Response
      */
-    public function destroy($id)
+    public function index(Request $request)
     {
-
-        if (Gate::denies('delete-user')) {
-            abort(403, 'unauthorized access to delete user');
-        }
-        try {
-            $user = User::where('id', $id)->delete();
-            return redirect()->route('user.index')->with('success', 'roles successfully deleted');
-        } catch (ModelNotFoundException $exception) {
-
-            return back()->with('error', 'error not found or role delete failed ');
-        }
+        $users = $this->userRepository->all();
+      
+        return view('backend.users.index')
+            ->with('users', $users);
     }
 
-    public function update_image()
+    /**
+     * Show the form for creating a new User.
+     *
+     * @return Response
+     */
+    public function create(roleRepository $roleRepo)
     {
+        $roles = $roleRepo->all();
+        return view('backend.users.create',compact('roles'));
+    }
 
-        $data = $this->validate(request(), [
-            'photo' => 'required|image',
-        ]);
+    /**
+     * Store a newly created User in storage.
+     *
+     * @param CreateUserRequest $request
+     *
+     * @return Response
+     */
+    public function store(CreateUserRequest $request)
+    {
+        $input = $request->all();
 
+        $user = $this->userRepository->create($input);
         if (request()->hasfile('photo')) {
             $user = User::where(['id' => auth::user()->id])->first();
             File::delete("profile/$user->image");
@@ -135,7 +72,115 @@ class UserController extends Controller
 
         }
 
-        return redirect()->back();
+        Flash::success('تم اضافة مستخدم جديد بنجاح');
 
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Display the specified User.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $user = $this->userRepository->find($id);
+
+        if (empty($user)) {
+            Flash::error('المستخدم غير متوفر');
+
+            return redirect(route('users.index'));
+        }
+
+        return view('backend.users.show')->with('user', $user);
+    }
+
+    /**
+     * Show the form for editing the specified User.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit(roleRepository $roleRepo,$id)
+    {
+        $user = $this->userRepository->find($id);
+        $roles =  $roleRepo->all();
+        if (empty($user)) {
+            Flash::error('المستخدم غير متوفر');
+
+            return redirect(route('users.index'));
+        }
+
+        return view('backend.users.edit')->with(['user'=> $user,'roles'=>$roles ]);
+    }
+
+    /**
+     * Update the specified User in storage.
+     *
+     * @param int $id
+     * @param UpdateUserRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateUserRequest $request)
+    {
+        // dd($id);
+        $user = $this->userRepository->find($id);
+        
+        if (empty($user)) {
+            Flash::error('المستخدم غير متوفر');
+
+            return redirect(route('users.index'));
+        }
+        if (request()->hasfile('image')) {
+            $user = $this->userRepository->find( auth::user()->id);
+            // dd($user);
+            File::delete("profile/$user->image");
+            $name = request('image')->getClientOriginalName();
+            $name = time() .uniqid(). '_' . $name;
+            request('image')->move(public_path() . '/profile/', $name);
+
+        }
+        
+        $request->image = $name;
+        $user = $this->userRepository->update($request->all(), $id);
+  
+        RoleUser::where('user_id', $id)->update([
+                    'name' => $request->name ?? "",
+                    'user_id' => Auth::id(),
+                    'role_id' => $request->role
+                ]);
+        Flash::success('تم تعديل بيانات المستخدم بنجاح');
+
+        return redirect(route('users.index'));
+    }
+
+    /**
+     * Remove the specified User from storage.
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        $user = $this->userRepository->find($id);
+
+        if (empty($user)) {
+            Flash::error('المستخدم غير متوفر');
+
+            return redirect(route('users.index'));
+        }
+
+        $this->userRepository->delete($id);
+
+        Flash::success('تم حذف المستخدم');
+
+        return redirect(route('users.index'));
     }
 }

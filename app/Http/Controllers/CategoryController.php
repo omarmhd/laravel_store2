@@ -2,122 +2,155 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use Dotenv\Result\Success;
-use Exception;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Http\Requests\CreateCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
+use App\Repositories\CategoryRepository;
+use App\Http\Controllers\AppBaseController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
+use Flash;
+use Response;
 
-class CategoryController extends Controller
+class CategoryController extends AppBaseController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
+    /** @var  CategoryRepository */
+    private $categoryRepository;
 
-        $categories=Category::all();
-        return view('admin.categories.categories',compact('categories'));
+    public function __construct(CategoryRepository $categoryRepo)
+    {
+        $this->categoryRepository = $categoryRepo;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display a listing of the Category.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *
+     * @return Response
+     */
+    public function index(Request $request)
+    {
+        $categories = $this->categoryRepository->all();
+
+        return view('backend.categories.index')
+            ->with('categories', $categories);
+    }
+
+    /**
+     * Show the form for creating a new Category.
+     *
+     * @return Response
      */
     public function create()
     {
-
-    return view('admin.categories.createCategory');
-    }
-
-
-    public function store(Request $request)
-    {
-
-        $request->validate([
-          'name'=>'required|unique:categories',
-          'status'=> 'required|in:active,disable',
-          'description'=> 'required'
-
-        ]);
-    try{
-        $category=new Category;
-        $category->name=$request->name;
-        $category->status=$request->status;
-        $category->description=$request->description;
-        $category->save();
-
-    return redirect()->route('category.index')->with('success','a new category has been added successfully') ;
-    }catch(ModelNotFoundException $exception){
-
-      return back()->with('error','error adding a new category') ;
-
-    }
-           return ;
-    }
-
-
-
-
-    public function edit($id)
-    {
-        $category =Category::findorfail($id);
-       return view('admin.categories.editCategory', compact('category'));
-
+        return view('backend.categories.create');
     }
 
     /**
-     * Update the specified resource in storage.
+     * Store a newly created Category in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Category  $category
-     * @return \Illuminate\Http\Response
+     * @param CreateCategoryRequest $request
+     *
+     * @return Response
      */
-    public function update(Request $request,  $id)
+    public function store(CreateCategoryRequest $request)
     {
+        $input = $request->all();
 
-        $validator = Validator::make($request->all(), [
-            'name'=>'required|min:6|unique:categories',
-            'status'=> 'required|in:active,disable',
-            'description'=> 'required'
+        $category = $this->categoryRepository->create($input);
 
-        ]);
+        Flash::success('تم اضافة القسم بنجاح');
 
-          if ($validator->fails()) {
-            return  back()->withErrors($validator);
-        }        try{
-            Category::where('id', $id)->update([
-                'name' => $request->input('name'),
-                'status' => $request->input('status'),
-                'description' => $request->input('description')
-            ]);
+        return redirect(route('categories.index'));
+    }
 
-            return  redirect()->route('category.index')->with('success', 'success updated category');
-        } catch (ModelNotFoundException $exception) {
+    /**
+     * Display the specified Category.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function show($id)
+    {
+        $category = $this->categoryRepository->find($id);
 
-            return back()->with('error', ' not found this category ');
+        if (empty($category)) {
+            Flash::error('القسم غير موجود');
 
-
+            return redirect(route('categories.index'));
         }
+
+        return view('backend.categories.show')->with('category', $category);
+    }
+
+    /**
+     * Show the form for editing the specified Category.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function edit($id)
+    {
+        $category = $this->categoryRepository->find($id);
+
+        if (empty($category)) {
+            Flash::error('القسم غير موجود');
+
+            return redirect(route('categories.index'));
         }
 
+        return view('backend.categories.edit')->with('category', $category);
+    }
 
+    /**
+     * Update the specified Category in storage.
+     *
+     * @param int $id
+     * @param UpdateCategoryRequest $request
+     *
+     * @return Response
+     */
+    public function update($id, UpdateCategoryRequest $request)
+    {
+        $category = $this->categoryRepository->find($id);
 
+        if (empty($category)) {
+            Flash::error('القسم غير موجود');
+
+            return redirect(route('categories.index'));
+        }
+
+        $category = $this->categoryRepository->update($request->all(), $id);
+
+        Flash::success('تم تعديل القسم بنجاح');
+
+        return redirect(route('categories.index'));
+    }
+
+    /**
+     * Remove the specified Category from storage.
+     *
+     * @param int $id
+     *
+     * @throws \Exception
+     *
+     * @return Response
+     */
     public function destroy($id)
     {
+        $category = $this->categoryRepository->find($id);
 
+        if (empty($category)) {
+            Flash::error('القسم غير موجود');
 
-        try{
-        $category =Category::findorfail($id);
-        $category->delete();
-        return back()->with("success","the category  deletion was successful");
-
-        }catch(ModelNotFoundException $exception){
-            return back()->with("error","not found this category");
+            return redirect(route('categories.index'));
         }
 
-}}
+        $this->categoryRepository->delete($id);
+
+        Flash::success('تم حذف المنتج بنجاح');
+
+        return redirect(route('categories.index'));
+    }
+}

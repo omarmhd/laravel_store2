@@ -22,3 +22,12 @@ use Illuminate\Support\Facades\Route;
 
 
 // Route::post('login',' Api\AuthController@login');
+
+
+Route::resource('products', 'ProductAPIController');
+
+Route::resource('categories', 'CategoryAPIController');
+
+Route::resource('users', 'UserAPIController');
+
+Route::resource('roles', 'roleAPIController');

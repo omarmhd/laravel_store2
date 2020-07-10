@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Validator;
 use App\User;
 class OrderController extends Controller
 {
+
+
+    public function __construct() {
+       
+        $this->middleware('can:access_to_controll_panel_as_a_seller');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,9 +27,8 @@ class OrderController extends Controller
     public function index()
     {
       $OrderProduct=new OrderProduct();
-     $orders= $OrderProduct->getDataProductsUser();
-     
-      return view('admin.products.products_order', compact('orders'));
+     $orders= $OrderProduct->getDataProductsUserForSeller();
+      return view('backend.orders.products_order', compact('orders'));
 
     }
 
@@ -135,14 +140,16 @@ class OrderController extends Controller
      * @param  \App\order  $order
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id,$status)
     {
+        $arr = [1,2];
+        if(in_array($status,$arr)){
+            OrderProduct::where('id',$id)->update([
+                'status'=>$status
+                 ]);
+        }
            //change status  to order  in pivot  table
-         OrderProduct::where('id',$id)->update([
-        'status'=>'1'
-
-
-         ]);
+   
              return back();
 
 

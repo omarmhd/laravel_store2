@@ -10,8 +10,8 @@ class MessageController extends Controller
     public function index(){
 
        $messages=DB::table('messages')->get();
-
-        return view('admin.messages',compact('messages'));
+        // dd($messages);
+        return view('backend.messages.messages',compact('messages'));
 
 
 

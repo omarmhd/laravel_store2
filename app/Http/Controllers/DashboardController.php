@@ -8,19 +8,28 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class DashboardController extends Controller
 {
 
 
     public function index(){
+      if (Gate::allows('admin')) {
+        $count_products=count(Product::get());
+        $count_users=count(User::get());
+        $count_orders=count(order::get());
+        $count_category=count(Category::get());
+        $count_messages=count(DB::table('messages')->get());
+        return view('backend.welcome',compact('count_products','count_users','count_orders','count_category','count_messages'));
+    } else {
+      $count_products=count(Product::where('user_id',auth()->user()->id)->get());
+      $count_orders=count(order::where('user_id',auth()->user()->id)->get());
+      return view('backend.welcome',compact('count_products','count_orders'));
 
-    $count_products=count(Product::get());
-    $count_users=count(User::get());
-    $count_orders=count(order::get());
-    $count_category=count(Category::get());
-    $count_messages=count(DB::table('messages')->get());
-      return view('admin.Dashboard',compact('count_products','count_users','count_orders','count_category','count_messages'));
+    }
+
+    
 
 
     }
