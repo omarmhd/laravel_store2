@@ -54,7 +54,10 @@ class RegisterController extends Controller
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],[
-            'email.unique'=>'هذا الايميل مستخدم مسبقا'
+            'email.unique'=>'هذا الايميل مستخدم مسبقا',
+            // 'required'=>'هذا الايميل مستخدم مسبقا',
+            'required'=>'هذا الحقل مطلوب',
+            'password.min'=>'يجب ان تكون كلمة السر اكثر من 8 احرف',
         ]);
     }
 

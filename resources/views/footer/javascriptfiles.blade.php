@@ -84,7 +84,10 @@
 	width: 'auto',
 	fit: true
 	});
-	$('.resp-tab-item')[0].click();
+	if(typeof($('.resp-tab-item')[0]) != "undefined") {
+		$('.resp-tab-item')[0].click();
+	}
+		
 	});
 
 </script>

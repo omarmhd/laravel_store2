@@ -103,7 +103,7 @@
                     <span class="focus-input100"></span>
                     @error('name')
                     <small  role="alert">
-                        <strong>{{ $message }}</strong>
+                       {{ $message }}
                     </small>
                 @enderror
                 </div>
@@ -125,7 +125,7 @@
                 <span class="txt1 p-b-11">
                     كلمة السر
                 </span>
-                <div class="wrap-input100 validate-input m-b-12" data-validate = "ادخل كلمة السر">
+                <div class="wrap-input100 validate-input m-b-36" data-validate = "ادخل كلمة السر">
                     <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
                     </span>
@@ -133,7 +133,7 @@
                     <span class="focus-input100"></span>
                     @error('password')
                     <small  role="alert">
-                        <strong>{{ $message }}</strong>
+                        {{ $message }}
                     </small>
                 @enderror
                 </div>
@@ -142,9 +142,9 @@
                     تأكيد كلمة المرور
                 </span>
                 <div class="wrap-input100 validate-input m-b-12" data-validate = "ادخل كلمة السر">
-                    {{-- <span class="btn-show-pass">
+                    <span class="btn-show-pass">
                         <i class="fa fa-eye"></i>
-                    </span> --}}
+                    </span>
                     <input class="input100" id="password-confirm" type="password" name="password_confirmation" required autocomplete="new-password" >
                     <span class="focus-input100"></span>
                 </div>

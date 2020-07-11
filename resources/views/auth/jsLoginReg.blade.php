@@ -13,4 +13,4 @@
     <!--===============================================================================================-->
         <script src="{{ asset('newDesign/vendor/countdowntime/countdowntime.js') }}"></script>
     <!--===============================================================================================-->
-        <script src="js/main.js"></script>
+        <script src="{{ asset('newDesign/js/main.js') }}"></script>
