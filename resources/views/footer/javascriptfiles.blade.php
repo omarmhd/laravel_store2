@@ -21,6 +21,7 @@
 <script src="{{ asset('newDesign/js/easy-responsive-tabs.js') }}"></script>
 <script>
 	$(document).ready(function () {
+
 	$('#horizontalTab').easyResponsiveTabs({
 	type: 'default', //Types: default, vertical, accordion           
 	width: 'auto', //auto or any width like 600px
@@ -83,7 +84,9 @@
 	width: 'auto',
 	fit: true
 	});
+	$('.resp-tab-item')[0].click();
 	});
+
 </script>
 
 	<script src="{{ asset('newDesign/js/jquery.waypoints.min.js') }}"></script>

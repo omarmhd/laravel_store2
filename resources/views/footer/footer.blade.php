@@ -1,4 +1,4 @@
-<div class="coupons">
+{{-- <div class="coupons">
 	<div class="coupons-grids text-center">
 		<div class="w3layouts_mail_grid">
 			<div class="col-md-3 w3layouts_mail_grid_left">
@@ -41,7 +41,7 @@
 		</div>
 
 	</div>
-</div>
+</div> --}}
 
 <div class="footer">
 	<div class="footer_agile_inner_info_w3l">
