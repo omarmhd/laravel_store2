@@ -45,9 +45,18 @@ class Category extends Model
         'name' => 'required|string',
         'status' => 'required|string'
     ];
+    public function product()
+    {
+        return $this->hasMany('App\Models\Product');
+    }
 
       public function getStatusAttribute($value)
     {
          return $value == 0?'غير فعال':'فعال';
+    }
+
+    public function newProducts()
+    {
+        return $this->hasMany('App\Models\Product')->orderBy('created_at', 'DESC')->limit(4);
     }
 }

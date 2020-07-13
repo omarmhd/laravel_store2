@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\role;
+use App\Models\Role;
 use App\Repositories\BaseRepository;
 
 /**
@@ -11,7 +11,7 @@ use App\Repositories\BaseRepository;
  * @version July 10, 2020, 11:04 am UTC
 */
 
-class roleRepository extends BaseRepository
+class RoleRepository extends BaseRepository
 {
     /**
      * @var array
@@ -35,6 +35,6 @@ class roleRepository extends BaseRepository
      **/
     public function model()
     {
-        return role::class;
+        return Role::class;
     }
 }

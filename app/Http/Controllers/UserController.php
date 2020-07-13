@@ -87,7 +87,7 @@ class UserController extends Controller
     public function show($id)
     {
         $user = $this->userRepository->find($id);
-
+        
         if (empty($user)) {
             Flash::error('المستخدم غير متوفر');
 

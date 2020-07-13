@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Cart;
-use App\order;
-use App\OrderProduct;
+use App\Models\Cart;
+use App\Models\order;
+use App\Models\OrderProduct;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-use App\User;
+use App\Models\User;
 class OrderController extends Controller
 {
 

@@ -161,7 +161,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
+        BaklySystems\LaravelMessenger\LaravelMessengerServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -232,7 +232,7 @@ return [
         'Form'      => Collective\Html\FormFacade::class,
         'Html'      => Collective\Html\HtmlFacade::class,
         'Flash'     => Laracasts\Flash\Flash::class,
-
+        'Messenger' => BaklySystems\LaravelMessenger\Facades\Messenger::class,
     ],
 
 ];

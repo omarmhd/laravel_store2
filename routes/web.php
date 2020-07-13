@@ -85,9 +85,11 @@ Route::group(['prefix' => ''], function () {
     //home page
     Route::get('/', 'HomeController@index')->name('home.index');
     Route::get('/category_products/{id}', 'HomeController@category_products')->name('home.category_products');
+    Route::get('/products', 'HomeController@showProducts')->name('home.products');
     //single_product_page
     Route::get('/show_product/{id}', 'HomeController@show')->name('home.show');
-
+    Route::get('/search-products', 'HomeController@search')->name('home.search_products');
+    Route::post('/store_comment', 'CommentController@store')->name('store.comment')->middleware('auth');
 
     
     //order
@@ -95,7 +97,7 @@ Route::group(['prefix' => ''], function () {
     Route::post('/store-order', 'OrderController@store')->name('order.store');
 
     //show_status page
-    Route::get('/show_status', 'HomeController@show_status_order')->name('show.status');
+    Route::get('/show_status', 'HomeController@show_status_order')->name('show.status')->middleware('auth');
 
     //cart
     Route::post('/store_cart', 'CartController@store')->name('cart.store')->middleware('auth');
@@ -112,10 +114,13 @@ Route::group(['prefix' => ''], function () {
     Route::get('/about', 'HomeAboutController@index')->name('about.index');
 
     //user profile
-    Route::get('/user/profile', 'HomeController@profile')->name('client.profile')->middleware('auth');
+    Route::get('/user/profile', 'HomeController@profile')->name('client.profile.edit')->middleware('auth');
     Route::put('/user/update', 'UserControllerFront@updateUser')->name('client.update')->middleware('auth');
     Route::put('/user/update-image', 'UserControllerFront@update_image')->name('client.update_image')->middleware('auth');
     Route::get('/user/beSeller', 'RequestToMakeSellerController@index')->name('client.beSeller')->middleware('auth');
     Route::post('/user/beSeller/store', 'RequestToMakeSellerController@store')->name('client.beSeller.store')->middleware('auth');
-
+    Route::get('/users/profile/{id}', 'UserControllerFront@show')->name('client.profile')->middleware('auth');
+    
+    //messenger
+    include('messenger.php');
 });

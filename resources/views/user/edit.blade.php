@@ -58,9 +58,9 @@
         
         <ul class="list-group">
           <li class="list-group-item text-muted"><i class="fa fa-dashboard fa-1x"></i> القائمة </li>
-          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المقبولة</strong></span></a> {{$numberOfOrders['accepted']}}</li>
-          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المعلقة</strong></span></a> {{$numberOfOrders['pending']}}</li>
-          <li class="list-group-item text-left"><a href="{{route('show.status')}}"><span class="pull-right"><strong> الطلبات المرفوضة</strong></span></a> {{$numberOfOrders['rejected']}}</li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}?status=1"><span class="pull-right"><strong> الطلبات المقبولة</strong></span></a> {{$numberOfOrders['accepted']}}</li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}?status=2"><span class="pull-right"><strong> الطلبات المعلقة</strong></span></a> {{$numberOfOrders['pending']}}</li>
+          <li class="list-group-item text-left"><a href="{{route('show.status')}}?status=3"><span class="pull-right"><strong> الطلبات المرفوضة</strong></span></a> {{$numberOfOrders['rejected']}}</li>
           {{-- <li class="list-group-item text-right"><span class="pull-left"><strong></strong></span> 37</li>
           <li class="list-group-item text-right"><span class="pull-left"><strong>Followers</strong></span> 78</li> --}}
         </ul> 

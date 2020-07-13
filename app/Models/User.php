@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model as Model;
-
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 /**
  * Class User
  * @package App\Models
@@ -17,9 +18,9 @@ use Illuminate\Database\Eloquent\Model as Model;
  * @property string $image
  * @property string $password
  */
-class User extends Model
+class User extends Authenticatable
 {
-
+    use Notifiable;use CanResetPassword;
     public $table = 'users';
     
 
@@ -68,18 +69,18 @@ class User extends Model
     public function  roles()
     {
      
-        return $this->belongsToMany('App\Role')->withPivot('name');
+        return $this->belongsToMany('App\Models\Role')->withPivot('name');
     }
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('quantity');
+        return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
     }
 
 
     public function orders()
     {
-        return $this->hasMany('App\order');
+        return $this->hasMany('App\Models\order');
     }
 
 
@@ -99,6 +100,10 @@ class User extends Model
         }
         return  false;
 
+    }
+     public function getImageAttribute($val)
+    {
+        return $val??'avatar.png';
     }
     
 }

@@ -6,7 +6,7 @@
 	<li> <a href="{{url('/register')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> التسجيل </a></li>
 	@endunless
 	@auth
-	<li> <a href="{{route('client.profile')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> بياناتي </a></li>
+	<li> <a href="{{route('client.profile.edit')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> بياناتي </a></li>
 	@endauth
 	@can('access_to_controll_panel')
 		<li> <a href="{{route('Dashboard.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> لوحة التحكم </a></li>

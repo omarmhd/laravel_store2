@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +14,7 @@ class order extends Model
 
     public function products()
     {
-        return $this->belongsToMany('App\Product')->withPivot('quantity');
+        return $this->belongsToMany('App\Models\Product')->withPivot('quantity');
     }
 
 }

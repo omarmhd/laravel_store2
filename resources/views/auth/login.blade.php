@@ -78,7 +78,16 @@
         <div class="wrap-login100 p-l-85 p-r-85 p-t-55 p-b-55">
             <form class="login100-form validate-form flex-sb flex-w" method="POST" action="{{ route('login') }}">
                 @csrf
+
                 <span class="login100-form-title p-b-32">
+                    @error('email')
+                    <div class="alert alert-danger text-sm-left" role="alert">
+                        {{ $message }}
+                      </div>
+                    {{-- <span class="invalid-feedback" role="alert">
+                        
+                    </span> --}}
+                @enderror
                    تسجيل الدخول
                 </span>
 
@@ -88,11 +97,7 @@
                 <div class="wrap-input100 validate-input m-b-36" data-validate = "ادخل البريد الالكتروني">
                     <input class="input100 @error('email') is-invalid @enderror" type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus >
                     <span class="focus-input100"></span>
-                    @error('email')
-                    <span class="invalid-feedback" role="alert">
-                        <strong>{{ $message }}</strong>
-                    </span>
-                @enderror
+                    
                 </div>
                 
                 <span class="txt1 p-b-11">

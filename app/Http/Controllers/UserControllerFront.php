@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\User;
 use Exception;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use File;
-
+use Hamcrest\Type\IsInteger;
 
 class UserControllerFront extends Controller
 {
@@ -63,17 +63,17 @@ class UserControllerFront extends Controller
     public function updateUser()
     {
         $id = auth()->user()->id;
-        
+
         $data = Validator::make(request()->all(), [
             'name'     => 'required|string|max:20|min:4',
             'email'    => 'required|email|unique:users,email,' . $id,
-            'mobile'  =>  'sometimes|nullable|unique:users,mobile'.$id,
+            'mobile'  =>  'sometimes|nullable|unique:users,mobile' . $id,
             'website'  => 'sometimes|nullable',
             'gender'   => 'required|integer',
         ]);
 
         $name = strip_tags(request("name"));
-        if($name !== ''){
+        if ($name !== '') {
             User::where('id', $id)->update([
                 'name'     => $name,
                 'email'    => request("email"),
@@ -83,7 +83,7 @@ class UserControllerFront extends Controller
 
             ]);
             return redirect()->back()->with('success', 'Done');
-        }else{
+        } else {
 
             return redirect()->back();
         }
@@ -125,15 +125,32 @@ class UserControllerFront extends Controller
             $user = User::where(['id' => auth::user()->id])->first();
             File::delete("profile/$user->image");
             $name = request('photo')->getClientOriginalName();
-            $name = time() .uniqid(). '_' . $name;
+            $name = time() . uniqid() . '_' . $name;
 
             request('photo')->move(public_path() . '/profile/', $name);
             User::where(['id' => auth::user()->id])->update(['image' => $name]);
-
         }
 
         return redirect()->back();
-
     }
 
+    public function show($id)
+    {
+        $id = (int) $id;
+        if (is_int($id)) {
+            $user = User::find($id);
+            if ($user) {
+                if ($user->id != auth()->user()->id) {
+                    return view('user.profile', compact('user'));
+                } else {
+                    return redirect('/');
+                }
+            } else {
+                return redirect('/');
+            }
+        } else {
+            return redirect('/');
+        }
+        return redirect('/');
+    }
 }

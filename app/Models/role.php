@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model as Model;
  *
  * @property string $name
  */
-class role extends Model
+class Role extends Model
 {
 
     public $table = 'roles';
@@ -41,6 +41,11 @@ class role extends Model
     public static $rules = [
         'name' => 'required|string'
     ];
+
+    public function  users()
+    {
+        return $this->belongsToMany('App\Models\User');
+    }
 
     
 }

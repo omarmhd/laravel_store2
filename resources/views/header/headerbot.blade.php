@@ -1,11 +1,11 @@
 <div class="header-bot">
 	<div class="header-bot_inner_wthreeinfo_header_mid">
 		<div class="col-md-4 header-middle">
-			{{-- <form action="#" method="post">
-					<input type="search" name="search" placeholder="Search here..." required="">
+			<form action="{{ route('home.search_products') }}" method="get">
+					<input type="search" name="search" placeholder="ابحث هنا..." required="">
 					<input type="submit" value=" ">
 				<div class="clearfix"></div>
-			</form> --}}
+			</form>
 		</div>
 		<!-- header-bot -->
 			<div class="col-md-4 logo_agile">

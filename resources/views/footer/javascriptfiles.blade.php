@@ -44,8 +44,8 @@
                 $output+= `	<div class="col-md-3 product-men">
 								<div class="men-pro-item simpleCart_shelfItem">
 									<div class="men-thumb-item">
-										<img src="{{ asset('product_images/') }}/${response[index].image}" alt="" class="pro-image-front">
-										<img src="{{ asset('product_images/') }}/${response[index].image}" alt="" class="pro-image-back">
+										<img src="{{ asset('product_images/') }}/${response[index].image}" alt="" class="pro-image-front" style="height: 250px">
+										<img src="{{ asset('product_images/') }}/${response[index].image}" alt="" class="pro-image-back" style="height: 250px">
 											<div class="men-cart-pro">
 												<div class="inner-men-cart-pro">
 													<a href="{{url('show_product/')}}/${response[index].id} " class="link-product-add-cart">التفاصيل</a>

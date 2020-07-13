@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
-use App\User;
+use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -55,7 +55,6 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ],[
             'email.unique'=>'هذا الايميل مستخدم مسبقا',
-            // 'required'=>'هذا الايميل مستخدم مسبقا',
             'required'=>'هذا الحقل مطلوب',
             'password.min'=>'يجب ان تكون كلمة السر اكثر من 8 احرف',
         ]);

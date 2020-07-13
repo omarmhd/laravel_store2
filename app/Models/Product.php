@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model as Model;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class Product
@@ -21,7 +22,7 @@ class Product extends Model
 {
 
     public $table = 'products';
-    
+
 
 
 
@@ -67,19 +68,52 @@ class Product extends Model
 
     public function getCategory()
     {
-        return $this->belongsTo('App\Category','category_id');
+        return $this->belongsTo('App\Models\Category', 'category_id');
     }
     public function users()
     {
-        return $this->belongsToMany('App\User');
+        return $this->belongsToMany('App\Models\User');
     }
     public function getUser()
     {
-        return $this->belongsTo('App\User','user_id');
+        return $this->belongsTo('App\Models\User', 'user_id');
     }
     public function orders()
     {
-        return $this->belongsToMany('App\order');
-
+        return $this->belongsToMany('App\Models\order');
     }
+    public function getCommonProducts()
+    {
+        return  DB::select(
+            'SELECT
+            products.*,
+            COUNT(*) AS COUNT
+        FROM
+            order_product
+        INNER JOIN products ON products.id = order_product.product_id
+        GROUP BY
+           products.id,
+           products.user_id,
+           products.category_id,
+           products.name,
+           products.details,
+           products.price,
+           products.long_description,
+           products.image,
+           products.created_at,
+           products.updated_at
+        HAVING
+            COUNT(*)
+        ORDER BY
+            COUNT
+        DESC
+        LIMIT 4'
+        );
+    }
+    
+    public function comments(){
+
+        return $this->hasMany('App\Models\Comment');
+   
+       }
 }

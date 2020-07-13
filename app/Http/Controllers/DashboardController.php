@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\order;
-use App\Product;
-use App\User;
+use App\Models\Category;
+use App\Models\order;
+use App\Models\Product;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
