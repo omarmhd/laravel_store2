@@ -57,6 +57,6 @@ class Category extends Model
 
     public function newProducts()
     {
-        return $this->hasMany('App\Models\Product')->orderBy('created_at', 'DESC')->limit(4);
+        return $this->hasMany('App\Models\Product')->orderBy('created_at', 'DESC')->limit(8);
     }
 }

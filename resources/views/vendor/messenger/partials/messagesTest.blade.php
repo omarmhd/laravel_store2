@@ -1,12 +1,12 @@
 @php
 $authId = auth()->id();
 @endphp
-
+@isset($messages)
 @if ($messages)
     @foreach ($messages as $key => $message)
     @if ($message->sender_id !== $authId)
-    <div class="incoming_msg message-row">
-        <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+    <div class="incoming_msg message-row" style="direction: ltr;">
+        <div class="incoming_msg_img"> <img src="{{ asset('profile/'. $withUser->image) }}" alt="sunil"> </div>
         <div class="received_msg">
           <div class="received_withd_msg">
             <p title="{{date('d-m-Y h:i A' ,strtotime($message->created_at))}}"class="sent">
@@ -33,3 +33,4 @@ $authId = auth()->id();
 
   @endforeach
   @endif
+  @endisset

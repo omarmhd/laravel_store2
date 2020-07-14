@@ -178,7 +178,9 @@ class ProductController extends AppBaseController
 
             return redirect(route('products.index'));
         }
-
+        if (!Gate::allows('edit-product',$product)) {
+            abort(403, 'unauthorized access to delete user');
+        }
         $this->productRepository->delete($id);
 
         Flash::success('تم حذف المنتج بنجاح.');

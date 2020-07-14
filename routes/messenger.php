@@ -6,6 +6,7 @@
 
     Route::middleware('auth')->prefix('messenger')->group(function () {
         Route::get('t/{id}', 'MessageController@laravelMessenger')->name('messenger');
+        Route::get('/chats', 'MessageController@chat')->name('chats');
         Route::post('send', 'MessageController@store')->name('message.store');
         Route::get('threads', 'MessageController@loadThreads')->name('threads');
         Route::get('more/messages', 'MessageController@moreMessages')->name('more.messages');

@@ -67,6 +67,7 @@
         <ul class="list-group">
           <li class="list-group-item text-muted"> <i class="fa fa-wrench fa-1x"></i> اعدادات</li>
           <li class="list-group-item text-right"><a href="{{route('client.beSeller')}}"><strong>طلب التسجيل كحرفي</strong></a></li>
+          <li class="list-group-item text-right"><a href="{{route('logout')}}"><strong>تسجيل الخروج</strong></a></li>
         </ul>   
         
       </div><!--/col-3-->

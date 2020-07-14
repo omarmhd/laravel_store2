@@ -117,12 +117,16 @@ class HomeController extends Controller
 
   public function showProducts()
   {
-    $products = Product::all();
+
     $productsCommon = new Product();
     $productsCommon = $productsCommon->getCommonProducts();
     $productsRecently = Product::orderBy('created_at', 'DESC')->limit(6)->get();
     $categories = Category::all();
     $current = 'products';
+
+    $products = Product::paginate(16);
+    $products->withPath(request()->fullUrl());
+    
     return \view('showProducts', compact('current', 'products', 'categories', 'productsRecently', 'productsCommon'));
   }
 

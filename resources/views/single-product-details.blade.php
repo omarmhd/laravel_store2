@@ -166,7 +166,7 @@
 
                                 <div class="single_page_agile_its_w3ls">
 
-                                   <a  href=""> <span style="color: blue"><img   class="img-circle" src="{{asset('profile/'.$product->getuser->image)}}"  style="width: 80px;height: 80px;border-radius: 50px;border: 1px solid gray;">{{$product->getuser->name}}</span>
+                                   <a  href="{{ route('client.profile',['id'=>$product->getuser->id]) }}"> <span style="color: blue"><img   class="img-circle" src="{{asset('profile/'.$product->getuser->image)}}"  style="width: 80px;height: 80px;border-radius: 50px;border: 1px solid gray;">{{$product->getuser->name}}</span>
                                    </a>
                                     {{-- <a>></h6></a> --}}
                                    <p>{{$product->getuser->description}}</p>

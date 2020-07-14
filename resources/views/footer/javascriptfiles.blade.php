@@ -51,14 +51,14 @@
 													<a href="{{url('show_product/')}}/${response[index].id} " class="link-product-add-cart">التفاصيل</a>
 												</div>
 											</div>
-											<span class="product-new-top">New</span>
+											<span class="product-new-top">جديد</span>
 											
 									</div>
 									<div class="item-info-product ">
 										<h4><a href="{{url('show_product/')}}/${response[index].id} ">${response[index].name}</a></h4>
 										<div class="info-product-price">
 											<span class="item_price">$ ${response[index].price}</span>
-											<del>$ ${response[index].price}</del>
+											
 										</div>
 																			
 									</div>

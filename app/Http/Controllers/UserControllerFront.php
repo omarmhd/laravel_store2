@@ -136,14 +136,21 @@ class UserControllerFront extends Controller
 
     public function show($id)
     {
+  
+
         $id = (int) $id;
         if (is_int($id)) {
             $user = User::find($id);
+            
             if ($user) {
+               
                 if ($user->id != auth()->user()->id) {
+                    if(!(($user->hasRole('Seller') && auth()->user()->hasRole('customer'))||($user->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+                        return redirect('/');
+                     }
                     return view('user.profile', compact('user'));
                 } else {
-                    return redirect('/');
+                    return redirect('user/profile');
                 }
             } else {
                 return redirect('/');

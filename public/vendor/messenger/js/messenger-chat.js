@@ -61,7 +61,7 @@
      */
     function newMessage(message, messageClass, failed = 0) {
 
-
+        // console.log(message);
             if(messageClass=="outgoing_msg"){
                 $('.messenger-body').append(`
                 <div class="message-row outgoing_msg">
@@ -72,8 +72,8 @@
                 </div>
             `);
             }else{
-                $('.messenger-body').append(`<div class="incoming_msg message-row">
-                <div class="incoming_msg_img"> <img src="https://ptetutorials.com/images/user-profile.png" alt="sunil"> </div>
+                $('.messenger-body').append(`<div class="incoming_msg message-row" style="direction: ltr;">
+                <div class="incoming_msg_img"> <img src="{{asset('profile/')}}/${message.image}" alt="sunil"> </div>
                 <div class="received_msg">
                   <div class="received_withd_msg">
                   <p>${message.message }</p>

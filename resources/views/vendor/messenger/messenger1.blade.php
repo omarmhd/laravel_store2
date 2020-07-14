@@ -159,15 +159,18 @@
                 @include('messenger::partials.messagesTest')
               </div>
               <div class="type_msg">
-                  
+                @isset($withUser) 
                 <div class="input_msg_write">
-                  <input type="hidden" name="receiverId" value="{{$withUser->id}}">
+                   
+                    <input type="hidden" name="receiverId" value="{{$withUser->id}}">
+                    
+                  
                   <textarea id="message-body" name="message" rows="2" placeholder="اكتب هنا....."></textarea>
                   {{-- <input type="text" class="write_msg" id="message-body" name="message" placeholder="اكتب هنا....." /> --}}
                   <button class="msg_send_btn" type="submit" id="send-btn"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
                 </div>
               </div>
-
+              @endisset
               {{-- <div class="panel-footer">
                 <input type="hidden" name="receiverId" value="{{$withUser->id}}">
                 <textarea id="message-body" name="message" rows="2" placeholder="Type your message..."></textarea>
@@ -240,6 +243,7 @@
 @section('js-scripts')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src=" {{ asset('vendor/messenger/js/pusher.min.js') }}"></script>
+    @isset($withUser)
     <script type="text/javascript">
         var withId        = {{$withUser->id}},
             authId        = {{auth()->id()}},
@@ -248,5 +252,7 @@
               cluster: '{{config('messenger.pusher.options.cluster')}}'
             });
     </script>
+    @endisset
+  
     <script src="{{ asset('vendor/messenger/js/messenger-chat.js') }}" charset="utf-8"></script>
 @endsection

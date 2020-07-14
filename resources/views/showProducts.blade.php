@@ -231,7 +231,7 @@
             @endforeach
 			
 				
-	
+            {{ $products->links() }}
 
 			<div class="clearfix"></div>
 		</div>

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Role;
+use App\Models\RoleUser;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -53,10 +55,10 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ],[
-            'email.unique'=>'هذا الايميل مستخدم مسبقا',
-            'required'=>'هذا الحقل مطلوب',
-            'password.min'=>'يجب ان تكون كلمة السر اكثر من 8 احرف',
+        ], [
+            'email.unique' => 'هذا الايميل مستخدم مسبقا',
+            'required' => 'هذا الحقل مطلوب',
+            'password.min' => 'يجب ان تكون كلمة السر اكثر من 8 احرف',
         ]);
     }
 
@@ -68,10 +70,17 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user =  User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+        $role = Role::where('name', 'customer')->first();
+
+        RoleUser::create([
+            'user_id' => $user->id,
+            'role_id' => $role->id
+        ]);
+        return  $user;
     }
 }

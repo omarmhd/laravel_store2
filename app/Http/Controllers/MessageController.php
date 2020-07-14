@@ -1,6 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\Role;
+use App\Models\User;
 use Pusher\Pusher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -27,15 +30,28 @@ class MessageController extends Controller
          return  back()->with('success','The message was deleted successfully');
 
      }
+     public function chat()
+     {
+         $threads  = Messenger::threads(auth()->id());
+        // dd($withUser);
+         return view('vendor.messenger.messenger1', compact('threads'));
+     }
 
      public function laravelMessenger($withId)
      {
         //  dd('test');
+        
          Messenger::makeSeen(auth()->id(), $withId);
          $withUser = config('messenger.user.model', 'App\Model\User')::findOrFail($withId);
+         if(!(($withUser->hasRole('Seller') && auth()->user()->hasRole('customer'))||($withUser->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+            return redirect('/');
+         }
+
+
          $messages = Messenger::messagesWith(auth()->id(), $withUser->id);
+        //  $message['image'] = User::find($withUser)->image;
          $threads  = Messenger::threads(auth()->id());
-        // dd($withUser);
+        // dd($threads);
          return view('vendor.messenger.messenger1', compact('withUser', 'messages', 'threads'));
      }
  
@@ -51,14 +67,22 @@ class MessageController extends Controller
  
          $authId = auth()->id();
          $withId = $request->withId;
+         $user = User::find($withId);
+         if(!(($user->hasRole('Seller') && auth()->user()->hasRole('customer'))||($user->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+            return response()->json([
+                'success' => false,
+                'message' => []
+            ], 200);
+         }
          $conversation = Messenger::getConversation($authId, $withId);
- 
+
          if (! $conversation) {
              $conversation = Messenger::newConversation($authId, $withId);
          }
- 
+
          $message = Messenger::newMessage($conversation->id, $authId, $request->message);
- 
+         $message['image'] = User::find($authId)->image;
+         
          // Pusher
          $pusher = new Pusher(
              config('messenger.pusher.app_key'),
@@ -143,8 +167,12 @@ class MessageController extends Controller
       */
      public function destroy1($id)
      {
+        if(!(($withUser->hasRole('Seller') && auth()->user()->hasRole('customer'))||($withUser->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+            return response()->json(['success' => false], 403);
+         }
+
          $confirm = Messenger::deleteMessage($id, auth()->id());
- 
+        
          return response()->json(['success' => true], 200);
      }
 }

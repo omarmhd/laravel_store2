@@ -1,6 +1,7 @@
 @php
 $authId = auth()->id();
 @endphp
+
 @if ($messages)
     @foreach ($messages as $key => $message)
         <div class="row message-row @if ($message->sender_id === $authId)left @else right @endif">
