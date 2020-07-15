@@ -22,8 +22,8 @@
                         <td>
                             {!! Form::open(['route' => ['categories.destroy', $category->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                <a href="{{ route('categories.show', [$category->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
+                                {{-- <a href="{{ route('categories.show', [$category->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-eye" aria-hidden="true"></i>
+                                </a> --}}
                                 <a href="{{ route('categories.edit', [$category->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-edit"></i></a>
                                 {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                             </div>

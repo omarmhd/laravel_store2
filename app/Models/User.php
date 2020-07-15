@@ -59,12 +59,13 @@ class User extends Authenticatable
      */
     public static $rules = [
         'name' => 'required|string',
-        // 'email' => 'required|email|unique:users',
-        // 'mobile' => 'required|numeric|unique:users',
+        'email' => 'required|email|unique:users',
+        'mobile' => 'required|numeric|unique:users',
         'website' => 'string|nullable',
         'description' => 'string|nullable',
         'image' => 'image|nullable',
-        'password' => 'required|string'
+        'password' => 'required|string',
+        'role' => 'required|integer'
     ];
     public function  roles()
     {

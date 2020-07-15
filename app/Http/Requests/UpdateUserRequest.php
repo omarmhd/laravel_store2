@@ -25,7 +25,15 @@ class UpdateUserRequest extends FormRequest
      */
     public function rules()
     {
-        $rules = User::$rules;
+        $rules = [
+            'name' => 'required|string',
+            'website' => 'string|nullable',
+            'description' => 'string|nullable',
+            'image' => 'image|nullable',
+            'password' => 'nullable',
+            'role' => 'required|integer',
+
+        ];
         return $rules;
     }
 }

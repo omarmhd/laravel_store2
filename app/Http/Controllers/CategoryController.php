@@ -54,8 +54,9 @@ class CategoryController extends AppBaseController
      */
     public function store(CreateCategoryRequest $request)
     {
+        // dd('test');
         $input = $request->all();
-
+        // dd($input);
         $category = $this->categoryRepository->create($input);
 
         Flash::success('تم اضافة القسم بنجاح');

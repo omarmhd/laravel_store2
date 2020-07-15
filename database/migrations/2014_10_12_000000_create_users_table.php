@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-
+use Illuminate\Support\Facades\Hash;
 class CreateUsersTable extends Migration
 {
     /**
@@ -20,13 +20,22 @@ class CreateUsersTable extends Migration
             $table->string('mobile')->unique()->nullable();;
             $table->string('website')->nullable();;
             $table->string('description')->nullable();;
+            $table->integer('gender')->nullable();
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+        DB::table('users')->insert(
+            [
+                'name'=>'admin',
+                'email'=>'admin@admin.com',
+                'password'=>Hash::make('123456789')
+            ]
+            );
     }
+
 
     /**
      * Reverse the migrations.

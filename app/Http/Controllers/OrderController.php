@@ -17,7 +17,7 @@ class OrderController extends Controller
 
     public function __construct() {
        
-        $this->middleware('can:access_to_controll_panel_as_a_seller');
+        // $this->middleware('can:access_to_controll_panel_as_a_seller');
     }
     /**
      * Display a listing of the resource.
@@ -26,8 +26,9 @@ class OrderController extends Controller
      */
     public function index()
     {
+     
       $OrderProduct=new OrderProduct();
-     $orders= $OrderProduct->getDataProductsUserForSeller();
+      $orders= $OrderProduct->getDataProductsUserForSeller();
       return view('backend.orders.products_order', compact('orders'));
 
     }

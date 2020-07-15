@@ -51,7 +51,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth','can:access_to_contro
 
     //messages
     Route::get('/view-message', 'MessageController@index')->name('message.index');
-    Route::get('/delete-message/{id}', 'MessageController@destroy')->name('message.delete');
+    Route::delete('/delete-message/{id}', 'MessageController@destroy')->name('message.delete');
     //about admin
     Route::post('/store-about', 'HomeAboutController@store')->name('about.store');
     Route::get('/edit-about', 'HomeAboutController@create')->name('about.edit');

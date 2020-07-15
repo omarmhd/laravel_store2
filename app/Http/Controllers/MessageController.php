@@ -14,7 +14,7 @@ class MessageController extends Controller
 {
     public function index(){
 
-       $messages=DB::table('messages')->get();
+       $messages=DB::table('messages_contact_us')->get();
         // dd($messages);
         return view('backend.messages.messages',compact('messages'));
 
@@ -25,7 +25,7 @@ class MessageController extends Controller
 
     public function destroy($id){
 
-        $messages=DB::table('messages')->where('id',$id)->delete();
+        $messages=DB::table('messages_contact_us')->where('id',$id)->delete();
 
          return  back()->with('success','The message was deleted successfully');
 

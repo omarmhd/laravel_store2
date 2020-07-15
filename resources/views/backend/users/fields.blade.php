@@ -75,7 +75,7 @@
       <label>{{__('dashboard.attributes.role')}}</label>
       <select class="form-control" name="role">
           @foreach ($roles as $role)
-               <option value="{{$role->id}}" @if($user->roles[0]->id == $role->id) {{ 'selected' }} @endif>{{$role->name}}</option>
+               <option value="{{$role->id}}" @isset($user) @if($user->roles[0]->id == $role->id) {{ 'selected' }} @endif @endisset>{{$role->name}}</option>
           @endforeach
       </select>
     </div>

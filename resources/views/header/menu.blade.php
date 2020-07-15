@@ -17,6 +17,11 @@
     float: right;
     width:auto !important;
 }
+a.menu__link {
+
+    letter-spacing: 0px !important;
+   
+}
 </style>
 <div class="ban-top">
 	<div class="container">

@@ -91,7 +91,9 @@
 								 $contact = \DB::table('contact')->latest('id')->first();
 								@endphp
 								<h6>رقم الهاتف</h6>
-								<p>{{ $contact->support_phone }}</p>
+								<p>@isset($contact->support_phone )
+									{{ $contact->support_phone }}
+								@endisset</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -101,7 +103,11 @@
 							</div>
 							<div class="w3-address-right">
 								<h6>البريد الالكتروني</h6>
-								<p>الايميل:<a href="mailto:{{$contact->support_email }}">{{$contact->support_email }}</a></p>
+								<p>الايميل:<a href="mailto:  @isset($contact->support_email)
+									{{$contact->support_email }}
+								@endisset">@isset($contact->support_email)
+									{{$contact->support_email }}
+								@endisset</a></p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
@@ -111,7 +117,9 @@
 							</div>
 							<div class="w3-address-right">
 								<h6>الموقع</h6>
-								<p>{{$contact->location_name }}
+								<p>@isset($contact->location_name)
+									{{$contact->location_name }}
+								@endisset
 								
 								</p>
 							</div>

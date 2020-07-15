@@ -29,13 +29,13 @@ class AuthServiceProvider extends ServiceProvider
         Passport::routes();
 
         Gate::define('access_to_controll_panel',function($user){
-              return $user->hasRoles(['admin',"Seller"]);
+              return $user->hasRoles(['admin',"seller"]);
         });
         Gate::define('admin',function($user){
             return $user->hasRoles(['admin']);
       });
         Gate::define('access_to_controll_panel_as_a_seller',function($user){
-            return $user->hasRoles(['Seller']);
+            return $user->hasRoles(['seller']);
       });
 
 

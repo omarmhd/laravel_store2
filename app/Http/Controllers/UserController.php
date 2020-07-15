@@ -13,6 +13,8 @@ use Flash;
 use Illuminate\Support\Facades\Auth;
 use Response;
 use File;
+use Illuminate\Support\Facades\Hash;
+
 class UserController extends Controller
 {
     /** @var  UserRepository */
@@ -33,7 +35,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         $users = $this->userRepository->all();
-      
+        // dd($users);
         return view('backend.users.index')
             ->with('users', $users);
     }
@@ -59,18 +61,26 @@ class UserController extends Controller
     public function store(CreateUserRequest $request)
     {
         $input = $request->all();
-
-        $user = $this->userRepository->create($input);
-        if (request()->hasfile('photo')) {
-            $user = User::where(['id' => auth::user()->id])->first();
-            File::delete("profile/$user->image");
-            $name = request('photo')->getClientOriginalName();
+        // dd($input);
+        if (request()->hasfile('image')) {
+            $name = request('image')->getClientOriginalName();
             $name = time() .uniqid(). '_' . $name;
-
-            request('photo')->move(public_path() . '/profile/', $name);
-            User::where(['id' => auth::user()->id])->update(['image' => $name]);
-
+            request('image')->move(public_path() . '/profile/', $name);
+            $input['image'] = $name;
         }
+
+        $input['password'] =  Hash::make($input['password']);
+        $user = $this->userRepository->create($input);
+        
+        if($user){
+            RoleUser::create([
+                'name' => $user->name ?? "",
+                'user_id' => $user->id,
+                'role_id' => $request->role
+            ]);
+            //  dd($user);
+        }
+
 
         Flash::success('تم اضافة مستخدم جديد بنجاح');
 
@@ -127,7 +137,7 @@ class UserController extends Controller
      */
     public function update($id, UpdateUserRequest $request)
     {
-        // dd($id);
+        $input = $request->all();
         $user = $this->userRepository->find($id);
         
         if (empty($user)) {
@@ -136,21 +146,28 @@ class UserController extends Controller
             return redirect(route('users.index'));
         }
         if (request()->hasfile('image')) {
-            $user = $this->userRepository->find( auth::user()->id);
-            // dd($user);
-            File::delete("profile/$user->image");
+           if($user->image != 'avatar.png'){
+               File::delete("profile/$user->image");
+           }
             $name = request('image')->getClientOriginalName();
             $name = time() .uniqid(). '_' . $name;
             request('image')->move(public_path() . '/profile/', $name);
+            $input['image'] = $name;
+        }else{
+            unset($input['image']);
+        }
 
+        if($input['password'] == null){
+            unset($input['password']);
+        }else{
+            $input['password'] =  Hash::make($input['password']);
         }
         
-        $request->image = $name;
-        $user = $this->userRepository->update($request->all(), $id);
+        $user = $this->userRepository->update($input, $id);
   
         RoleUser::where('user_id', $id)->update([
                     'name' => $request->name ?? "",
-                    'user_id' => Auth::id(),
+                    'user_id' => $id,
                     'role_id' => $request->role
                 ]);
         Flash::success('تم تعديل بيانات المستخدم بنجاح');

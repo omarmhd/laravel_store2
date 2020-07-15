@@ -123,7 +123,9 @@ class UserControllerFront extends Controller
 
         if (request()->hasfile('photo')) {
             $user = User::where(['id' => auth::user()->id])->first();
-            File::delete("profile/$user->image");
+            if($user->image != 'avatar.png'){
+                File::delete("profile/$user->image");
+            }
             $name = request('photo')->getClientOriginalName();
             $name = time() . uniqid() . '_' . $name;
 

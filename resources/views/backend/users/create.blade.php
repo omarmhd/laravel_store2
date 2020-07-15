@@ -13,7 +13,7 @@
                           <div class="card-header">
                             <h3 class="card-title">{{__('dashboard.attributes.user_cerate')}}</h3>
                           </div>
-                            {!! Form::open(['route' => 'users.store']) !!}
+                            {!! Form::open(['route' => 'users.store','enctype'=>"multipart/form-data"]) !!}
 
                                 @include('backend.users.fields')
 

@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class CategoryController extends Controller
+class Category1Controller extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -35,21 +35,21 @@ class CategoryController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store1(Request $request)
     {
+        // // dd('test');
+        // $request->validate([
+        //   'name'=>'required|unique:categories',
+        //   'status'=> 'required|in:active,disable',
+        //   'description'=> 'required'
 
-        $request->validate([
-          'name'=>'required|unique:categories',
-          'status'=> 'required|in:active,disable',
-          'description'=> 'required'
-
-        ]);
+        // ]);
     try{
-        $category=new Category;
-        $category->name=$request->name;
-        $category->status=$request->status;
-        $category->description=$request->description;
-        $category->save();
+        // $category=new Category;
+        // $category->name=$request->name;
+        // $category->status=$request->status;
+        // // $category->description=$request->description;
+        // $category->save();
 
     return redirect()->route('category.index')->with('success','a new category has been added successfully') ;
     }catch(ModelNotFoundException $exception){

@@ -58,10 +58,10 @@ class HomeContactController extends Controller
             'name' => 'required',
             'email' => 'required|email',
             'subject' => 'required',
-
+ 
         ])->validate();
 
-        $meessage = DB::table('messages')->insert([
+        $meessage = DB::table('messages_contact_us')->insert([
             'meesage' => $request->message,
             'name' =>  $request->name,
             'email' => $request->email,

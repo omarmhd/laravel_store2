@@ -13,14 +13,17 @@
 <div class="card-body">
     <div class="form-group">
     <label for="name">{{__('dashboard.attributes.name')}}</label>
-      <input type="text" class="form-control" value="{{ $category->name }}" id="name" name="name" placeholder="{{__('dashboard.placeholder.name_category')}}">
+      <input type="text" class="form-control" value="@isset($category) {{ "$category->name" }}@endisset" id="name" name="name" placeholder="{{__('dashboard.placeholder.name_category')}}">
     </div>
     <div class="form-group">
         <label>{{__('dashboard.attributes.status')}}</label>
         <select class="form-control" name="status">
-            {{ $category->status }}
-            <option value="1" {{ $category->status== "فعال" ? 'selected':''}} >فعال</option>
-            <option value="2" {{ $category->status== "غير فعال" ? 'selected':''}}>غير فعال</option>
+            
+           
+            <option value="1" @isset($category)  {{ $category->status== "فعال" ? 'selected':''}}  @endisset>فعال</option>
+            <option value="2"  @isset($category)  {{ $category->status== "غير فعال" ? 'selected':''}} @endisset>غير فعال</option>
+            
+            
         </select>
       </div>
 

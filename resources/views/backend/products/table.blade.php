@@ -10,7 +10,7 @@
                 <thead>
                     <tr>
                         <th>{{ __('dashboard.attributes.product') }}</th>
-                        @can("access_to_controll_panel")
+                        @can("admin")
                          <th>{{ __('dashboard.attributes.owner') }} </th>
                         @endcan
                         <th>{{ __('dashboard.attributes.category') }}</th>
@@ -25,7 +25,7 @@
                 @foreach($products as $product)
                     <tr>
                     <td>{{ $product->name }}</td>
-                    @can("access_to_controll_panel")
+                    @can("admin")
                     <td>{{ $product->getUser->name }}</td>
                     @endcan
                     <td>{{ $product->getCategory->name }}</td>
@@ -49,8 +49,8 @@
                             </form> --}}
                             {!! Form::open(['route' => ['products.destroy', $product->id], 'method' => 'delete']) !!}
                             <div class='btn-group'>
-                                <a href="{{ route('products.show', [$product->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-eye" aria-hidden="true"></i>
-                                </a>
+                                {{-- <a href="{{ route('products.show', [$product->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-eye" aria-hidden="true"></i>
+                                </a> --}}
                                 <a href="{{ route('products.edit', [$product->id]) }}" class='btn btn-default btn-xs'><i class="fa fa-edit"></i></a>
                                 {!! Form::button('<i class="fa fa-trash" aria-hidden="true"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('Are you sure?')"]) !!}
                             </div>

@@ -39,8 +39,12 @@
                     <td>{{$message->meesage}}</td>
                     <td>{{$message->created_at}}</td>
                     <td>
+                      {!! Form::open(['route' => ['message.delete', $message->id], 'method' => 'delete']) !!}
+                      
+                      {!! Form::button('<i class="fa fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-danger btn-xs', 'onclick' => "return confirm('هل انت متأكد من الحذف ؟')"]) !!}
+                     {{-- <a class="remove-category  btn  btn-danger " data-value='{{$message->id}}' style ="color:#fff"><i class="far fa-trash-alt"></i>حذف  </a> --}}
+                      {!! Form::close() !!}
 
-                     <a class="remove-category  btn  btn-danger " data-value='{{$message->id}}' style ="color:#fff"><i class="far fa-trash-alt"></i>delete  </a>
                     </td>
                                </tr>
 
