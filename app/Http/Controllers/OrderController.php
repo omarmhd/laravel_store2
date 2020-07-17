@@ -71,7 +71,7 @@ class OrderController extends Controller
                 'billing_city'=>$request->city,
                 'billing_postalcode'=>$request->postalcode,
                 'billing_province'=>$request->province,
-                'billing_phone'=> $request->phone,
+                'billing_phone'=> $request->phone_number,
 
                 ]);
                 $orderid=$order->id;

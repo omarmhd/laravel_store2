@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\RoleUser;
-use App\RequestToMakeSeller;
+use App\Models\RequestToMakeSeller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;

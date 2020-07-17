@@ -103,7 +103,7 @@
 
               </ul>
           </li>
-          <li class="nav-item has-treeview">
+          {{-- <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                       <i class="fa fa-product-hunt"></i>
                     <p>
@@ -123,7 +123,7 @@
 
 
               </ul>
-          </li>
+          </li> --}}
                  <li class="nav-item has-treeview">
                   <a href="#" class="nav-link">
                       <i class="fa fa-users"></i>

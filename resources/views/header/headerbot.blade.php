@@ -9,7 +9,7 @@
 		</div>
 		<!-- header-bot -->
 			<div class="col-md-4 logo_agile">
-				<h2><a href="{{ route('home.index') }}"><span>حرفتي</span></a></h2>
+				<h2><a href="{{ route('home.index') }}"><span>حرفة</span></a></h2>
 			</div>
         <!-- header-bot -->
 		<div class="col-md-4 agileits-social top_content">

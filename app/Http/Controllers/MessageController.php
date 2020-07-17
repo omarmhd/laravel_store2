@@ -43,7 +43,7 @@ class MessageController extends Controller
         
          Messenger::makeSeen(auth()->id(), $withId);
          $withUser = config('messenger.user.model', 'App\Model\User')::findOrFail($withId);
-         if(!(($withUser->hasRole('Seller') && auth()->user()->hasRole('customer'))||($withUser->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+         if(!(($withUser->hasRole('seller') && auth()->user()->hasRole('client'))||($withUser->hasRole('client') && auth()->user()->hasRole('seller')))){
             return redirect('/');
          }
 
@@ -68,7 +68,7 @@ class MessageController extends Controller
          $authId = auth()->id();
          $withId = $request->withId;
          $user = User::find($withId);
-         if(!(($user->hasRole('Seller') && auth()->user()->hasRole('customer'))||($user->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+         if(!(($user->hasRole('seller') && auth()->user()->hasRole('client'))||($user->hasRole('client') && auth()->user()->hasRole('seller')))){
             return response()->json([
                 'success' => false,
                 'message' => []
@@ -167,7 +167,7 @@ class MessageController extends Controller
       */
      public function destroy1($id)
      {
-        if(!(($withUser->hasRole('Seller') && auth()->user()->hasRole('customer'))||($withUser->hasRole('customer') && auth()->user()->hasRole('Seller')))){
+        if(!(($withUser->hasRole('seller') && auth()->user()->hasRole('client'))||($withUser->hasRole('client') && auth()->user()->hasRole('seller')))){
             return response()->json(['success' => false], 403);
          }
 
