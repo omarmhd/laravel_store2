@@ -60,7 +60,7 @@ class RoleController extends AppBaseController
 
         $role = $this->roleRepository->create($input);
 
-        Flash::success('Role saved successfully.');
+        Flash::success('تم اضافة الصلاحية بنجاح');
 
         return redirect(route('roles.index'));
     }
@@ -77,7 +77,7 @@ class RoleController extends AppBaseController
         $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
-            Flash::error('Role not found');
+            Flash::error('هذه الصلاحية غير متوفرة');
 
             return redirect(route('roles.index'));
         }
@@ -97,7 +97,7 @@ class RoleController extends AppBaseController
         $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
-            Flash::error('Role not found');
+            Flash::error('هذه الصلاحية غير متوفرة');
 
             return redirect(route('roles.index'));
         }
@@ -118,14 +118,14 @@ class RoleController extends AppBaseController
         $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
-            Flash::error('Role not found');
+            Flash::error('هذه الصلاحية غير متوفرة');
 
             return redirect(route('roles.index'));
         }
 
         $role = $this->roleRepository->update($request->all(), $id);
 
-        Flash::success('Role updated successfully.');
+        Flash::success('تم تحديث الصلاحية بنجاح');
 
         return redirect(route('roles.index'));
     }
@@ -144,14 +144,14 @@ class RoleController extends AppBaseController
         $role = $this->roleRepository->find($id);
 
         if (empty($role)) {
-            Flash::error('Role not found');
+            Flash::error('هذه الصلاحية غير متوفرة');
 
             return redirect(route('roles.index'));
         }
 
         $this->roleRepository->delete($id);
 
-        Flash::success('Role deleted successfully.');
+        Flash::success('تم حذف الصلاحية بنجاح');
 
         return redirect(route('roles.index'));
     }

@@ -36,7 +36,8 @@ class ProductController extends AppBaseController
         if (Gate::allows('admin')) {
             $products = $this->productRepository->all();
         } else {
-            $products = $this->productRepository->all(['user_id' => auth()->user()->id]);
+            $products = $this->productRepository->allQuery(['user_id' => auth()->user()->id])->orderBy('id','DESC')->get();
+            // dd($products);
             // dd($products);
         }
         // $products = $this->productRepository->all(['user_id' => auth()->user()->id]);

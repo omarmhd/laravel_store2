@@ -33,11 +33,12 @@ class HomeController extends Controller
   {
 
 
-
+    // return true;
     $products = Product::all();
     $categories = Category::all();
     $count = count($products);
     $current = 'home';
+    // return $products;
     return view('home', compact('products', 'count', 'categories', 'current'));
   }
 

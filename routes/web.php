@@ -93,7 +93,7 @@ Route::group(['prefix' => ''], function () {
 
     
     //order
-    Route::get('/checkout', 'OrderController@show')->name('checkout.index');
+    Route::get('/checkout', 'OrderController@show')->name('checkout.index')->middleware('auth');;
     Route::post('/store-order', 'OrderController@store')->name('order.store');
 
     //show_status page
