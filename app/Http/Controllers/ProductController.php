@@ -74,10 +74,13 @@ class ProductController extends AppBaseController
        if(!auth()->user()->hasRole('admin')){
           $input['user_id'] = Auth::id();
        }
-        $name = request('image')->getClientOriginalName();
-        $name = time() .uniqid(). '_' . $name;
-        request('image')->move(public_path() . '/product_images/', $name);
-        $input['image'] = $name;
+       if (request()->hasfile('image')) {
+            $name = request('image')->getClientOriginalName();
+            $name = time() .uniqid(). '_' . $name;
+            request('image')->move(public_path() . '/product_images/', $name);
+            $input['image'] = $name;
+       }
+
         $product = $this->productRepository->create($input);
         
         Flash::success('تم اضافة المنتج بنجاح.');
@@ -153,11 +156,13 @@ class ProductController extends AppBaseController
             abort(403, 'unauthorized access to delete user');
         }
         $input = $request->all();
-        File::delete("product_images/$product->image");
-        $name = request('image')->getClientOriginalName();
-        $name = time() .uniqid(). '_' . $name;
-        request('image')->move(public_path() . '/product_images/', $name);
-        $input['image'] = $name;
+        if (request()->hasfile('image')) {
+            File::delete("product_images/$product->image");
+            $name = request('image')->getClientOriginalName();
+            $name = time() .uniqid(). '_' . $name;
+            request('image')->move(public_path() . '/product_images/', $name);
+            $input['image'] = $name;        }
+
         // dd($input);
 
         $product = $this->productRepository->update($input, $id);
