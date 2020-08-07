@@ -229,7 +229,11 @@
         }
     });
       $(document).ready(function() {
-          $('#quantity').editable();
+          $('#quantity').editable({
+            success: function(response, newValue) {
+              location.reload();
+           }
+          });
       });
 
       $('#order_delete').on('click',function(){
@@ -241,7 +245,7 @@
         },
         dataType: "html",
         success: function (response) {
-          console.log(response);
+          location.reload();
         }
       });
       })
