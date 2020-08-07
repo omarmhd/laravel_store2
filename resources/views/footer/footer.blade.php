@@ -141,7 +141,7 @@
 			</div>
 			<div class="col-sm-6 newsright" style="
 ">
-				<form action="#" method="post">
+				<form action="#">
 					<input type="email" placeholder="ادخل بريدك الالكتروني" name="email" required="">
 					<input type="submit" value="أشتراك">
 				</form>
