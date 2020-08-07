@@ -4,7 +4,8 @@ $authId = auth()->id();
 @isset($messages)
 @if ($messages)
     @foreach ($messages as $key => $message)
-    @if ($message->sender_id !== $authId)
+    {{-- {{ dd($messages) }} --}}
+    @if ($message->sender_id != $authId)
     <div class="incoming_msg message-row" style="direction: ltr;">
         <div class="incoming_msg_img"> <img src="{{ asset('profile/'. $withUser->image) }}" alt="sunil"> </div>
         <div class="received_msg">

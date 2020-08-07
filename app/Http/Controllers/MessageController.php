@@ -48,6 +48,7 @@ class MessageController extends Controller
 
 
          $messages = Messenger::messagesWith(auth()->id(), $withUser->id);
+        //  dd($messages);
         //  $message['image'] = User::find($withUser)->image;
          $threads  = Messenger::threads(auth()->id());
         // dd($threads);
