@@ -33,6 +33,6 @@ class UpdateProductRequest extends FormRequest
             'price' => 'required|numeric',
             'long_description' => 'string',
             'image' => 'sometimes|image'
-        ]
+        ];
     }
 }
