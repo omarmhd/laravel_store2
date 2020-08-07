@@ -102,7 +102,7 @@
                     <div class="form-group">
                         
                         <div class="col-xs-12">
-                          <label for="email"><h4>البريد الالكتروني</h4></label>
+                          <label for="email"><h4>البريد الالكتروني </h4></label>
                             <input type="email" value="{{$user->email}}" class="form-control" name="email" id="last_name" placeholder="ادخل البريد الالكتروني" title="ادخل البريد الالكتروني">
                         </div>
                     </div>
@@ -115,7 +115,7 @@
                     </div>
                     <div class="form-group">
                       <div class="col-xs-12">
-                         <label for="website"><h4>الموقع الالكتروني</h4></label>
+                         <label for="website"><h4>الموقع الالكتروني(اختياري)</h4></label>
                           <input type="text" class="form-control" value="{{$user->website}}" name="website" id="website" placeholder="ادخل موقعك الالكتروني" title="ادخل موقعك الالكتروني">
                       </div>
                   </div>

@@ -151,9 +151,9 @@ class UserControllerFront extends Controller
             if ($user) {
 
                 if ($user->id != auth()->user()->id) {
-                    if (!(($user->hasRole('seller') && auth()->user()->hasRole('client')) || ($user->hasRole('client') && auth()->user()->hasRole('seller')))) {
-                        return redirect('/');
-                    }
+                    // if (!(($user->hasRole('seller') && auth()->user()->hasRole('client')) || ($user->hasRole('client') && auth()->user()->hasRole('seller')))) {
+                    //     return redirect('/');
+                    // }
                     return view('user.profile', compact('user'));
                 } else {
                     return redirect('user/profile');

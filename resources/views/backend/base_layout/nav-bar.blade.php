@@ -7,5 +7,8 @@
       <li class="nav-item">
         <a class="nav-link"  href="{{ route('logout') }}">تسجيل الخروج</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link"  href="{{ route('home.index') }}">الذهاب للموقع الرئيسي</a>
+      </li>
     </ul>
   </nav>
