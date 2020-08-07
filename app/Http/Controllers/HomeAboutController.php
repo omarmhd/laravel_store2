@@ -26,8 +26,9 @@ class HomeAboutController extends Controller
     public function create()
     {
 
+        $about = DB::table('about')->latest('id')->first();
 
-        return view('backend.edit_pages.editAboutPage');
+        return view('backend.edit_pages.editAboutPage',compact('about'));
     }
 
     public function  store(Request $request)

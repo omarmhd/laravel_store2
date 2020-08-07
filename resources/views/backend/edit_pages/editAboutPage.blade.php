@@ -23,11 +23,11 @@
               <div class="card-body">
                 <div class="form-group">
                     <label for="exampleInputEmail1">اهدافنا</label>
-                    <textarea class="form-control" rows="3" name="Our_Mission" value=""></textarea>
+                    <textarea class="form-control" rows="3" name="Our_Mission" > @isset($about) {{ $about->Our_Mission }} @else {{ old('Our_Mission') }} @endisset</textarea>
                   </div>
                   <div class="form-group">
                       <label for="exampleInputEmail1">رؤيتنا </label>
-                      <textarea class="form-control" rows="3"  name="Our_Vision" value="">></textarea>
+                      <textarea class="form-control" rows="3"  name="Our_Vision" > @isset($about) {{ $about->Our_Vision }} @else {{ old('Our_Vision') }} @endisset</textarea>
                     </div>
 
               <div class="card-footer">

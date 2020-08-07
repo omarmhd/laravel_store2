@@ -27,9 +27,9 @@ class HomeContactController extends Controller
     public function create()
     {
 
-        //$contact = DB::table('contact')->latest('id')->first();
-
-        return view('backend.edit_pages.editContactPage');
+        $contact = DB::table('contact')->latest('id')->first();
+        // dd($contact);
+        return view('backend.edit_pages.editContactPage',compact('contact'));
     }
 
     public function  store(Request $request)
