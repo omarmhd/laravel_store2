@@ -3,6 +3,15 @@
   <head>
 
     @include('backend.base_layout.header.header')
+    <style>
+    	h1, h2, h3, h4, h5, h6 {
+		font-family: Hacen;
+	}
+	a {
+		font-family: Hacen !important;
+		/* font-size: 14px;*/
+	}
+  </style>
     @stack('style')
   </head>
   <body class="hold-transition sidebar-mini">
