@@ -174,7 +174,7 @@
 							<div class="social-icons team-icons right-w3l fotw33">
 							<div class="caption">
 								<h4>احمد العشي</h4>
-								<p>حوت الباك اند</p>						
+								<p>تركنا وحدنا</p>						
 							</div>
 								<ul class="social-nav model-3d-0 footer-social w3_agile_social two">
 															<li><a href="#" class="facebook">

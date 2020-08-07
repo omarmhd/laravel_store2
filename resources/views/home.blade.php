@@ -15,34 +15,32 @@
 			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 			<li data-target="#myCarousel" data-slide-to="1" class=""></li>
 			<li data-target="#myCarousel" data-slide-to="2" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="3" class=""></li>
-			<li data-target="#myCarousel" data-slide-to="4" class=""></li> 
 		</ol>
 		<div class="carousel-inner" role="listbox">
 			<div class="item active"> 
 				<div class="container">
 					<div class="carousel-caption">
-						{{-- <h3>The Biggest <span>Sale</span></h3>
-						<p>Special for today</p>
-						<a class="hvr-outline-out button2" href="mens.html">Shop Now </a> --}}
+						<h3><span>متجر حرفة للمنتجات والأعمال اليدوية  </span></h3>
+						<p>أفخم المنتجات اليدوية تجدها فى متجر حرفة  </p>
+						<a class="hvr-outline-out button2" href="{{route('home.products')}}">تسوق الأن  </a>
 					</div>
 				</div>
 			</div>
 			<div class="item item2"> 
 				<div class="container">
 					<div class="carousel-caption">
-						{{-- <h3>Summer <span>Collection</span></h3>
-						<p>New Arrivals On Sale</p>
-						<a class="hvr-outline-out button2" href="mens.html">Shop Now </a> --}}
+						<h3><span>متجر حرفة للمنتجات والأعمال اليدوية  </span></h3>
+						<p>أفخم المنتجات اليدوية تجدها فى متجر حرفة  </p>
+						<a class="hvr-outline-out button2" href="{{route('home.products')}}">تسوق الأن  </a>
 					</div>
 				</div>
 			</div>
 			<div class="item item3"> 
 				<div class="container">
 					<div class="carousel-caption">
-						{{-- <h3>The Biggest <span>Sale</span></h3>
-						<p>Special for today</p>
-						<a class="hvr-outline-out button2" href="mens.html">Shop Now </a> --}}
+						<h3><span>متجر حرفة للمنتجات والأعمال اليدوية  </span></h3>
+						<p>أفخم المنتجات اليدوية تجدها فى متجر حرفة  </p>
+						<a class="hvr-outline-out button2" href="{{route('home.products')}}">تسوق الأن  </a>
 					</div>
 				</div>
 			</div>
