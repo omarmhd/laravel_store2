@@ -29,8 +29,8 @@ h1,h2,h3,h4,h5,h6 {
 	@can('access_to_controll_panel')
 		<li> <a href="{{route('Dashboard.index')}}"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> لوحة التحكم </a></li>
 	@endcan
-			<li><i class="fa fa-phone" aria-hidden="true"></i>للاتصال :  0592617154</li>
-			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:omar@gmail.com">omar@gmail.com</a></li>
+			<li><i class="fa fa-phone" aria-hidden="true"></i>للاتصال :450592617154</li>
+			<li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:omar@gmail.com">ahmed@gmail.com</a></li>
 		</ul>
 	</div>
 </div>
